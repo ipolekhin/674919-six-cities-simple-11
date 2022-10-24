@@ -6,8 +6,14 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
+const Store = {
+  CountPlaces: 5,
+} as const;
+
 root.render(
   <React.StrictMode>
-    <App />
+    <App
+      countPlaces={Store.CountPlaces}
+    />
   </React.StrictMode>,
 );

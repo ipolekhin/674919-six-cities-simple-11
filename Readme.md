@@ -1,6 +1,6 @@
 # Личный проект «Шесть городов (простой)»
 
-* Студент: [Иван Полехин](https://up.htmlacademy.ru/react/11/user/674919).
+* Студент: [Иван Полехин](https://htmlacademy.ru/profile/id674919).
 * Наставник: [Олег Глущенко](https://htmlacademy.ru/profile/id305355).
 
 ---
