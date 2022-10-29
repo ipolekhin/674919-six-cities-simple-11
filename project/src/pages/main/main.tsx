@@ -1,11 +1,14 @@
 import React from 'react';
 import PlaceCard from '../../components/place-card/place-card';
+import {Link} from 'react-router-dom';
+import {AuthorizationStatus} from '../../const';
 
 type MainProps = {
+  authorizationStatus: string;
   countPlaces: number;
 }
 
-const Main = ({countPlaces}: MainProps): JSX.Element => (
+const Main = ({authorizationStatus, countPlaces}: MainProps): JSX.Element => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -18,18 +21,19 @@ const Main = ({countPlaces}: MainProps): JSX.Element => (
 
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <div className="header__nav-profile">
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+              { authorizationStatus === AuthorizationStatus.Auth &&
+                <li className="header__nav-item user">
+                  <div className="header__nav-profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
 
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </div>
-              </li>
+                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  </div>
+                </li>}
 
               <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">Sign out</span>
-                </a>
+                <Link className="header__nav-link" to={authorizationStatus !== AuthorizationStatus.Auth ? '/login' : '#'}>
+                  <span className="header__signout">Sign{authorizationStatus !== AuthorizationStatus.Auth ? ' in' : ' out'}</span>
+                </Link>
               </li>
             </ul>
           </nav>
