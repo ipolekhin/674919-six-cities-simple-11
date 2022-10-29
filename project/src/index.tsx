@@ -8,12 +8,14 @@ const root = ReactDOM.createRoot(
 
 const Store = {
   CountPlaces: 5,
+  AuthorizationStatus: 'NO_AUTH',
 } as const;
 
 root.render(
   <React.StrictMode>
     <App
       countPlaces={Store.CountPlaces}
+      authorizationStatus={Store.AuthorizationStatus}
     />
   </React.StrictMode>,
 );

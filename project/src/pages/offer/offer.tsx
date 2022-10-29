@@ -1,8 +1,12 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
+import {AppRoute, AuthorizationStatus} from '../../const';
 
-const Offer = (): JSX.Element => (
+type OfferProps = {
+  authorizationStatus: string;
+}
+
+const Offer = ({authorizationStatus}: OfferProps): JSX.Element => (
   <div className="page">
     <header className="header">
       <div className="container">
@@ -15,17 +19,19 @@ const Offer = (): JSX.Element => (
 
           <nav className="header__nav">
             <ul className="header__nav-list">
-              <li className="header__nav-item user">
-                <div className="header__nav-profile">
-                  <div className="header__avatar-wrapper user__avatar-wrapper"></div>
-                  <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                </div>
-              </li>
+              { authorizationStatus === AuthorizationStatus.Auth &&
+                <li className="header__nav-item user">
+                  <div className="header__nav-profile">
+                    <div className="header__avatar-wrapper user__avatar-wrapper"></div>
+
+                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                  </div>
+                </li>}
 
               <li className="header__nav-item">
-                <a className="header__nav-link" href="#">
-                  <span className="header__signout">Sign out</span>
-                </a>
+                <Link className="header__nav-link" to={authorizationStatus !== AuthorizationStatus.Auth ? '/login' : '#'}>
+                  <span className="header__signout">Sign{authorizationStatus !== AuthorizationStatus.Auth ? ' in' : ' out'}</span>
+                </Link>
               </li>
             </ul>
           </nav>
