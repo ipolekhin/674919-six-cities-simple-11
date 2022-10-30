@@ -1,11 +1,13 @@
 import React from 'react';
 import PlaceCard from '../../components/place-card/place-card';
+import {Offers} from '../../types/offers';
 
 type MainProps = {
   countPlaces: number;
+  offers: Offers;
 }
 
-const Main = ({countPlaces}: MainProps): JSX.Element => (
+const Main = ({countPlaces, offers}: MainProps): JSX.Element => (
   <main className="page__main page__main--index">
     <h1 className="visually-hidden">Cities</h1>
 
