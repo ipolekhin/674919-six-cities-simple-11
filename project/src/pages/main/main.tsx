@@ -1,11 +1,11 @@
 import React from 'react';
-import PlaceCard from '../../components/place-card/place-card';
+import PlaceCards from '../../components/place-cards/place-cards';
 import {Offers} from '../../types/offers';
 
 type MainProps = {
   countPlaces: number;
   offers: Offers;
-}
+};
 
 const Main = ({countPlaces, offers}: MainProps): JSX.Element => (
   <main className="page__main page__main--index">
@@ -82,17 +82,7 @@ const Main = ({countPlaces, offers}: MainProps): JSX.Element => (
             </ul>
           </form>
 
-          <div className="cities__places-list places__list tabs__content">
-            <PlaceCard/>
-
-            <PlaceCard/>
-
-            <PlaceCard/>
-
-            <PlaceCard/>
-
-            <PlaceCard/>
-          </div>
+          <PlaceCards offers={offers}/>
         </section>
 
         <div className="cities__right-section">

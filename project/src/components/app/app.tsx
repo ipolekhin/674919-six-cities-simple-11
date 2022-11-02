@@ -11,7 +11,7 @@ type AppProps = {
   authorizationStatus: string;
   countPlaces: number;
   offers: Offers;
-}
+};
 
 const App = ({authorizationStatus, countPlaces, offers}: AppProps): JSX.Element => (
   <BrowserRouter>
@@ -21,7 +21,7 @@ const App = ({authorizationStatus, countPlaces, offers}: AppProps): JSX.Element 
 
         <Route path={AppRoute.Login} element={<Login/>}/>
 
-        <Route path={AppRoute.Offer} element={<Offer/>}/>
+        <Route path={AppRoute.Offer} element={<Offer offers={offers}/>}/>
       </Route>
 
       <Route
