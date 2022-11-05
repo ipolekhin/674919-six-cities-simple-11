@@ -439,8 +439,8 @@ export const offers: Offers = [
     },
     'description': 'This is a place for dreamers to reset, reflect, and create. Designed with a pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
     'location': {
-      'latitude': 52.397540000000006,
-      'longitude': 4.9099759999999995,
+      'latitude': 52.3909553943508,
+      'longitude': 4.929309666406198,
       'zoom': 16
     },
     'id': nanoid(),
@@ -493,8 +493,8 @@ export const offers: Offers = [
     },
     'description': 'This is a place for dreamers to reset, reflect, and create. Designed with a pace in mind, our hope is that you enjoy every part of your stay; from making local coffee by drip in the morning, choosing the perfect record to put on as the sun sets.',
     'location': {
-      'latitude': 52.36354,
-      'longitude': 4.911976,
+      'latitude': 52.3609553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'id': nanoid(),
@@ -544,8 +544,8 @@ export const offers: Offers = [
     },
     'description': 'A new spacious villa, one floor. All commodities, jacuzzi and beautiful scenery. Ideal for families or friends.',
     'location': {
-      'latitude': 52.36954000000001,
-      'longitude': 4.914976,
+      'latitude': 52.3909553943508,
+      'longitude': 4.85309666406198,
       'zoom': 16
     },
     'id': nanoid(),
