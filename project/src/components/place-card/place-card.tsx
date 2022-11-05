@@ -9,10 +9,10 @@ type PlaceCardProps = {
 };
 
 const PlaceCard = ({offer, onSetActiveOfferId}: PlaceCardProps): JSX.Element => {
-  const {id, image, isPremium, price, title, type, rating} = offer;
+  const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return (
-    <article className="cities__card place-card" onMouseOver={() => {onSetActiveOfferId(id);}}>
+    <article className="cities__card place-card" onMouseLeave={() => {onSetActiveOfferId(0);}} onMouseOver={() => {onSetActiveOfferId(id);}}>
       { isPremium &&
 
         <div className="place-card__mark">
@@ -21,7 +21,7 @@ const PlaceCard = ({offer, onSetActiveOfferId}: PlaceCardProps): JSX.Element => 
 
       <div className="cities__image-wrapper place-card__image-wrapper">
         <Link to={`offer/${id}`}>
-          <img className="place-card__image" src={image} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image"/>
         </Link>
       </div>
 
