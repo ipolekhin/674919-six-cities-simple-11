@@ -2,7 +2,7 @@ import React from 'react';
 import {useParams} from 'react-router-dom';
 import {Offers} from '../../types/offers';
 import {Ratings} from '../../const';
-import Form from "../../components/form/form";
+import Form from '../../components/form/form';
 
 type OfferProps = {
   offers: Offers;
@@ -21,15 +21,21 @@ type OfferProps = {
 const Offer = ({offers}: OfferProps): JSX.Element => {
   const params = useParams();
   const currentOffer = offers.find((offer) => String(offer.id) === params.id);
-  // const {id, images, isPremium, price, title, type, rating} = currentOffer;
+
+  if (!currentOffer) {
+    return <div>Такого офера нет</div>;
+  }
+
+  const {id, images, isPremium, price, title, type, rating} = currentOffer;
+  const imagesSliced = images.slice(1, 7);
 
   return (
-    <main className="page__main page__main--property" data-id={currentOffer?.id}>
+    <main className="page__main page__main--property" data-id={id}>
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            { currentOffer?.images.map((imageSrc:string, index:number) => (
-              <div className="property__image-wrapper" key={index}>
+            { imagesSliced?.map((imageSrc:string, index:number) => (
+              <div className="property__image-wrapper" data-key={`${imageSrc}`} key={`${imageSrc} ${String(index)}`}>
                 <img className="property__image" src={imageSrc} alt="Photo studio"/>
               </div>
             ))}
@@ -39,7 +45,7 @@ const Offer = ({offers}: OfferProps): JSX.Element => {
         <div className="property__container container">
           <div className="property__wrapper">
             {
-              currentOffer?.isPremium &&
+              isPremium &&
 
               <div className="property__mark">
                 <span>Premium</span>
@@ -48,22 +54,22 @@ const Offer = ({offers}: OfferProps): JSX.Element => {
 
             <div className="property__name-wrapper">
               <h1 className="property__name">
-                {currentOffer?.title}
+                {title}
               </h1>
             </div>
 
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={{width: Ratings[Math.round(currentOffer?.rating || 1) - 1]}}></span>
+                <span style={{width: Ratings[Math.round(rating) - 1]}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
 
-              <span className="property__rating-value rating__value">{currentOffer?.rating}</span>
+              <span className="property__rating-value rating__value">{rating}</span>
             </div>
 
             <ul className="property__features">
               <li className="property__feature property__feature--entire">
-                {currentOffer?.type}
+                {type}
               </li>
 
               <li className="property__feature property__feature--bedrooms">
@@ -76,7 +82,7 @@ const Offer = ({offers}: OfferProps): JSX.Element => {
             </ul>
 
             <div className="property__price">
-              <b className="property__price-value">&euro;{currentOffer?.price}</b>
+              <b className="property__price-value">&euro;{price}</b>
               <span className="property__price-text">&nbsp;night</span>
             </div>
 
