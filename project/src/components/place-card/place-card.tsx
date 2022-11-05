@@ -5,14 +5,14 @@ import {Offer} from '../../types/offers';
 
 type PlaceCardProps = {
   offer: Offer;
-  onSetActiveOfferId: (id: number) => void;
+  onSetOfferActive: (id: number | string) => void;
 };
 
-const PlaceCard = ({offer, onSetActiveOfferId}: PlaceCardProps): JSX.Element => {
+const PlaceCard = ({offer, onSetOfferActive}: PlaceCardProps): JSX.Element => {
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return (
-    <article className="cities__card place-card" onMouseLeave={() => {onSetActiveOfferId(0);}} onMouseOver={() => {onSetActiveOfferId(id);}}>
+    <article className="cities__card place-card" onMouseOver={() => {onSetOfferActive(id);}}>
       { isPremium &&
 
         <div className="place-card__mark">
