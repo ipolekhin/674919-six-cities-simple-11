@@ -9,7 +9,7 @@ const Form = (): JSX.Element => {
     setFormData({...formData, [name]: value});
   };
 
-  const isSendForm: boolean = (formData.review.length <= 50 && formData.rating.length === 0);
+  const isSendForm: boolean = (formData.review.length >= 50 && formData.rating.length !== 0);
 
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
@@ -43,7 +43,7 @@ const Form = (): JSX.Element => {
           your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
 
-        <button className="reviews__submit form__submit button" type="submit" disabled={isSendForm}>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={!isSendForm}>Submit</button>
       </div>
     </form>
   );
