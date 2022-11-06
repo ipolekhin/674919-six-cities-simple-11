@@ -3,12 +3,14 @@ import ReviewsList from '../../components/reviews-list/reviews-list';
 import {useParams} from 'react-router-dom';
 import {Offers} from '../../types/offers';
 import {Ratings} from '../../const';
+import {Reviews} from '../../types/reviews';
 
 type OfferProps = {
   offers: Offers;
+  reviews: Reviews;
 };
 
-const Offer = ({offers}: OfferProps): JSX.Element => {
+const Offer = ({offers, reviews}: OfferProps): JSX.Element => {
   const params = useParams();
   const currentOffer = offers.find((offer) => String(offer.id) === params.id);
 
@@ -142,7 +144,7 @@ const Offer = ({offers}: OfferProps): JSX.Element => {
               </div>
             </div>
 
-            <ReviewsList/>
+            <ReviewsList reviews={reviews}/>
           </div>
         </div>
         <section className="property__map map"></section>
