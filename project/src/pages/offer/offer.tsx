@@ -1,18 +1,20 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import {useParams} from 'react-router-dom';
-import {Offers} from '../../types/offers';
-import {Ratings} from '../../const';
+import {Offers, Offer} from '../../types/offers';
+import {Ratings, MapClassName, City} from '../../const';
 import {Reviews} from '../../types/reviews';
+import Map from '../../components/map/map';
 
 type OfferProps = {
   offers: Offers;
   reviews: Reviews;
 };
 
-const Offer = ({offers, reviews}: OfferProps): JSX.Element => {
+const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
   const params = useParams();
   const currentOffer = offers.find((offer) => String(offer.id) === params.id);
+  const [activeOffer] = useState<Offer | undefined>(undefined);
 
   if (!currentOffer) {
     return <div>Такого офера нет</div>;
@@ -147,7 +149,7 @@ const Offer = ({offers, reviews}: OfferProps): JSX.Element => {
             <ReviewsList reviews={reviews}/>
           </div>
         </div>
-        <section className="property__map map"></section>
+        <Map offers={offers} city={City} activeOffer={activeOffer} blockClassName={MapClassName.PageOffer}/>
       </section>
 
       <div className="container">
@@ -242,4 +244,4 @@ const Offer = ({offers, reviews}: OfferProps): JSX.Element => {
   );
 };
 
-export default Offer;
+export default OfferPage;

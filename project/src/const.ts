@@ -30,3 +30,8 @@ export enum City {
   Lng = 4.897976,
   Zoom = 13,
 }
+
+export enum MapClassName {
+  PageOffer = 'property__map',
+  PageMain = 'cities__map',
+}

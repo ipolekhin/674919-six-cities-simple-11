@@ -2,7 +2,7 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import {AppRoute} from '../../const';
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
-import Offer from '../../pages/offer/offer';
+import OfferPage from '../../pages/offer/offer';
 import PageNotExist from '../../pages/page-not-exist/page-not-exist';
 import Layout from '../layout/layout';
 import {Offers} from '../../types/offers';
@@ -23,7 +23,7 @@ const App = ({authorizationStatus, countPlaces, offers, reviews}: AppProps): JSX
 
         <Route path={AppRoute.Login} element={<Login/>}/>
 
-        <Route path={AppRoute.Offer} element={<Offer offers={offers} reviews={reviews}/>}/>
+        <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
       </Route>
 
       <Route
