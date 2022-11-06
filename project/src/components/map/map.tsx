@@ -8,10 +8,10 @@ import {Markers} from '../../const';
 type MapProps = {
   offers: Offers;
   city: {
-    title: string;
-    lat: number;
-    lng: number;
-    zoom: number;
+    Title: string;
+    Lat: number;
+    Lng: number;
+    Zoom: number;
   };
   activeOffer: Offer | undefined;
 }
@@ -56,9 +56,7 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   }, [map, offers, activeOffer]);
 
   return (
-    <div className="cities__right-section">
-      <section className="cities__map map" ref={mapRef}></section>
-    </div>
+    <section className="cities__map map" ref={mapRef}></section>
   );
 };
 

@@ -25,8 +25,8 @@ export enum Markers {
 }
 
 export enum City {
-  title = 'Amsterdam',
-  lat = 52.37454,
-  lng = 4.897976,
-  zoom = 13,
+  Title = 'Amsterdam',
+  Lat = 52.37454,
+  Lng = 4.897976,
+  Zoom = 13,
 }

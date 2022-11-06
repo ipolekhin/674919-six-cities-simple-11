@@ -12,12 +12,6 @@ type MainProps = {
 const Main = ({countPlaces, offers}: MainProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
-  const setOfferActive = (offerId: string | number) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-
-    setActiveOffer(currentOffer);
-  };
-
   return (
     <main className="page__main page__main--index">
       <h1 className="visually-hidden">Cities</h1>
@@ -93,10 +87,12 @@ const Main = ({countPlaces, offers}: MainProps): JSX.Element => {
               </ul>
             </form>
 
-            <PlaceCards offers={offers} onSetOfferActive={setOfferActive}/>
+            <PlaceCards offers={offers} onSetActiveOffer={setActiveOffer}/>
           </section>
 
-          <Map offers={offers} city={City} activeOffer={activeOffer}/>
+          <div className="cities__right-section">
+            <Map offers={offers} city={City} activeOffer={activeOffer}/>
+          </div>
         </div>
       </div>
     </main>
