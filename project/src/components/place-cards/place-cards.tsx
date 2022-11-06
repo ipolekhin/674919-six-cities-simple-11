@@ -5,10 +5,12 @@ import {Offer, Offers} from '../../types/offers';
 type PlaceCardsProps = {
   offers: Offers;
   onSetActiveOffer: (offer: Offer | undefined) => void;
+  listClassName: string;
+  itemClassName: string;
 };
 
-const PlaceCards = ({offers, onSetActiveOffer}: PlaceCardsProps): JSX.Element => (
-  <div className='cities__places-list places__list tabs__content'>
+const PlaceCards = ({offers, onSetActiveOffer, listClassName, itemClassName}: PlaceCardsProps): JSX.Element => (
+  <div className={`${listClassName} places__list`}>
     {
       offers && offers.map((offer) => (
         <PlaceCard offer={offer} onSetActiveOffer={onSetActiveOffer} key={offer.id}/>

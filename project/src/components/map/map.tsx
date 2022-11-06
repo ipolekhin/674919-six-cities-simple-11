@@ -14,10 +14,10 @@ type MapProps = {
     Zoom: number;
   };
   activeOffer: Offer | undefined;
-  blockClassName: string;
+  elementClassName: string;
 }
 
-const Map = ({offers, city, activeOffer, blockClassName}: MapProps): JSX.Element => {
+const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -57,7 +57,7 @@ const Map = ({offers, city, activeOffer, blockClassName}: MapProps): JSX.Element
   }, [map, offers, activeOffer]);
 
   return (
-    <section className={`${blockClassName} map`} ref={mapRef}></section>
+    <section className={`${elementClassName} map`} ref={mapRef}></section>
   );
 };
 

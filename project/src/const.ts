@@ -31,7 +31,11 @@ export enum City {
   Zoom = 13,
 }
 
-export enum MapClassName {
-  PageOffer = 'property__map',
-  PageMain = 'cities__map',
+export enum PropertyClassName {
+  MapPageOffer = 'property__map',
+  MapPageMain = 'cities__map',
+  PlaceCardListNear = 'near-places__list',
+  PlaceCardItemNear = 'cities__places-list tabs__content',
+  PlaceCardListCities = 'cities__places-list tabs__content',
+  PlaceCardItemCities = 'cities__card',
 }

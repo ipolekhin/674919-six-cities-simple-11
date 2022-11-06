@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PlaceCards from '../../components/place-cards/place-cards';
 import {Offer, Offers} from '../../types/offers';
 import Map from '../../components/map/map';
-import {City, MapClassName} from '../../const';
+import {City, PropertyClassName} from '../../const';
 
 type MainProps = {
   countPlaces: number;
@@ -87,11 +87,11 @@ const Main = ({countPlaces, offers}: MainProps): JSX.Element => {
               </ul>
             </form>
 
-            <PlaceCards offers={offers} onSetActiveOffer={setActiveOffer}/>
+            <PlaceCards offers={offers} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListCities} itemClassName={PropertyClassName.PlaceCardItemCities}/>
           </section>
 
           <div className="cities__right-section">
-            <Map offers={offers} city={City} activeOffer={activeOffer} blockClassName={MapClassName.PageMain}/>
+            <Map offers={offers} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageMain}/>
           </div>
         </div>
       </div>
