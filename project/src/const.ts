@@ -18,3 +18,15 @@ export enum AuthorizationStatus {
 export const Ratings: string[] = ['20%', '40%', '60%', '80%', '100%'];
 
 export const FiveStar: number[] = [5, 4, 3, 2, 1];
+
+export enum Markers {
+  Default = '/img/pin.svg',
+  Active = '/img/pin-active.svg',
+}
+
+export enum City {
+  title = 'Amsterdam',
+  lat = 52.37454,
+  lng = 4.897976,
+  zoom = 13,
+}
