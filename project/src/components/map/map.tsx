@@ -3,7 +3,7 @@ import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer, Offers} from '../../types/offers';
 import useMap from '../../hooks/useMap';
-import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
+import {Markers} from '../../const';
 
 type MapProps = {
   offers: Offers;
@@ -21,24 +21,27 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   const map = useMap(mapRef, city);
 
   const defaultCustomIcon = new Icon({
-    iconUrl: URL_MARKER_DEFAULT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconUrl: Markers.Default,
+    iconSize: [27, 39],
+    iconAnchor: [27, 39],
   });
 
   const currentCustomIcon = new Icon({
-    iconUrl: URL_MARKER_CURRENT,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
+    iconUrl: Markers.Active,
+    iconSize: [27, 39],
+    iconAnchor: [27, 39],
   });
 
   useEffect(() => {
     if (map) {
+      const markers: [number, number][] = [];
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
+
+        markers.push([offer.location.latitude, offer.location.longitude]);
 
         marker
           .setIcon(
@@ -48,6 +51,7 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
           )
           .addTo(map);
       });
+      map.fitBounds(markers, {padding: [20, 20]});
     }
   }, [map, offers, activeOffer]);
 
