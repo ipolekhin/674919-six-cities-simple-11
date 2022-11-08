@@ -18,6 +18,7 @@ export enum AuthorizationStatus {
 export const Ratings: string[] = ['20%', '40%', '60%', '80%', '100%'];
 
 export const FiveStar: number[] = [5, 4, 3, 2, 1];
+export const Months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export enum Markers {
   Default = '/img/pin.svg',
@@ -25,8 +26,17 @@ export enum Markers {
 }
 
 export enum City {
-  title = 'Amsterdam',
-  lat = 52.37454,
-  lng = 4.897976,
-  zoom = 13,
+  Title = 'Amsterdam',
+  Lat = 52.37454,
+  Lng = 4.897976,
+  Zoom = 13,
+}
+
+export enum PropertyClassName {
+  MapPageOffer = 'property__map',
+  MapPageMain = 'cities__map',
+  PlaceCardListNear = 'near-places__list',
+  PlaceCardItemNear = 'near-places',
+  PlaceCardListCities = 'cities__places-list tabs__content',
+  PlaceCardItemCities = 'cities',
 }

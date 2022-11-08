@@ -8,15 +8,16 @@ import {Markers} from '../../const';
 type MapProps = {
   offers: Offers;
   city: {
-    title: string;
-    lat: number;
-    lng: number;
-    zoom: number;
+    Title: string;
+    Lat: number;
+    Lng: number;
+    Zoom: number;
   };
   activeOffer: Offer | undefined;
+  elementClassName: string;
 }
 
-const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
+const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
 
@@ -56,9 +57,7 @@ const Map = ({offers, city, activeOffer}: MapProps): JSX.Element => {
   }, [map, offers, activeOffer]);
 
   return (
-    <div className="cities__right-section">
-      <section className="cities__map map" ref={mapRef}></section>
-    </div>
+    <section className={`${elementClassName} map`} ref={mapRef}></section>
   );
 };
 

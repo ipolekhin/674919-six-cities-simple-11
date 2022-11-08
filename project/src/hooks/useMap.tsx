@@ -3,10 +3,10 @@ import {Map, TileLayer} from 'leaflet';
 
 type UseMapProps = {
   city: {
-    title: string;
-    lat: number;
-    lng: number;
-    zoom: number;
+    Title: string;
+    Lat: number;
+    Lng: number;
+    Zoom: number;
   };
   mapRef: MutableRefObject<HTMLElement | null>;
 }
@@ -19,10 +19,10 @@ const useMap = (mapRef: UseMapProps['mapRef'], city:UseMapProps['city']) => {
     if (mapRef.current !== null && !isRenderedRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
-          lat: city.lat,
-          lng: city.lng,
+          lat: city.Lat,
+          lng: city.Lng,
         },
-        zoom: city.zoom,
+        zoom: city.Zoom,
       });
 
       const layer = new TileLayer(

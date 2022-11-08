@@ -1,17 +1,19 @@
 import React from 'react';
 import PlaceCard from '../place-card/place-card';
-import {Offers} from '../../types/offers';
+import {Offer, Offers} from '../../types/offers';
 
 type PlaceCardsProps = {
   offers: Offers;
-  onSetOfferActive: (id: number | string) => void;
+  onSetActiveOffer: (offer: Offer | undefined) => void;
+  listClassName: string;
+  itemClassName: string;
 };
 
-const PlaceCards = ({offers, onSetOfferActive}: PlaceCardsProps): JSX.Element => (
-  <div className='cities__places-list places__list tabs__content'>
+const PlaceCards = ({offers, onSetActiveOffer, listClassName, itemClassName}: PlaceCardsProps): JSX.Element => (
+  <div className={`${listClassName} places__list`}>
     {
       offers && offers.map((offer) => (
-        <PlaceCard offer={offer} onSetOfferActive={onSetOfferActive} key={offer.id}/>
+        <PlaceCard offer={offer} onSetActiveOffer={onSetActiveOffer} itemClassName={itemClassName} key={offer.id}/>
       ))
     }
   </div>

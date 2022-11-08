@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PlaceCards from '../../components/place-cards/place-cards';
 import {Offer, Offers} from '../../types/offers';
 import Map from '../../components/map/map';
-import {City} from '../../const';
+import {City, PropertyClassName} from '../../const';
 
 type MainProps = {
   countPlaces: number;
@@ -11,12 +11,6 @@ type MainProps = {
 
 const Main = ({countPlaces, offers}: MainProps): JSX.Element => {
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
-
-  const setOfferActive = (offerId: string | number) => {
-    const currentOffer = offers.find((offer) => offer.id === offerId);
-
-    setActiveOffer(currentOffer);
-  };
 
   return (
     <main className="page__main page__main--index">
@@ -93,10 +87,12 @@ const Main = ({countPlaces, offers}: MainProps): JSX.Element => {
               </ul>
             </form>
 
-            <PlaceCards offers={offers} onSetOfferActive={setOfferActive}/>
+            <PlaceCards offers={offers} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListCities} itemClassName={PropertyClassName.PlaceCardItemCities}/>
           </section>
 
-          <Map offers={offers} city={City} activeOffer={activeOffer}/>
+          <div className="cities__right-section">
+            <Map offers={offers} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageMain}/>
+          </div>
         </div>
       </div>
     </main>
