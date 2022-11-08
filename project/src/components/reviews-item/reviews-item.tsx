@@ -1,6 +1,6 @@
 import React from 'react';
 import {Review} from '../../types/reviews';
-import {Ratings} from '../../const';
+import {Months, Ratings} from '../../const';
 
 type ReviewProps = {
   review: Review;
@@ -8,6 +8,10 @@ type ReviewProps = {
 
 const ReviewsItem = ({review}: ReviewProps): JSX.Element => {
   const {comment, date, rating, user} = review;
+  const ratingPercent = Ratings[Math.round(rating) - 1];
+  const dateFormatted = new Date(date);
+  const dateMonth = Months[dateFormatted.getMonth()];
+  const dateYear = dateFormatted.getFullYear();
 
   return (
     <li className="reviews__item">
@@ -24,13 +28,13 @@ const ReviewsItem = ({review}: ReviewProps): JSX.Element => {
       <div className="reviews__info">
         <div className="reviews__rating rating">
           <div className="reviews__stars rating__stars">
-            <span style={{width: Ratings[Math.round(rating) - 1]}}></span>
+            <span style={{width: ratingPercent}}></span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
 
         <p className="reviews__text">{comment}</p>
-        <time className="reviews__time" dateTime={date}>April 2019</time>
+        <time className="reviews__time" dateTime={date}>{dateMonth} {dateYear}</time>
       </div>
     </li>
   );

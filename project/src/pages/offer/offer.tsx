@@ -23,6 +23,14 @@ const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
 
   const {id, images, isPremium, price, title, type, rating} = currentOffer;
   const imagesSliced = images.slice(1, 7);
+  let countOffersNear = 5;
+  const offersNear = offers.filter((item, index) => {
+    if (item.id !== id) {
+      countOffersNear--;
+    }
+    return item.id !== id && countOffersNear > 0;
+  });
+  const ratingPercent = Ratings[Math.round(rating) - 1];
 
   return (
     <main className="page__main page__main--property" data-id={id}>
@@ -55,7 +63,7 @@ const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
 
             <div className="property__rating rating">
               <div className="property__stars rating__stars">
-                <span style={{width: Ratings[Math.round(rating) - 1]}}></span>
+                <span style={{width: ratingPercent}}></span>
                 <span className="visually-hidden">Rating</span>
               </div>
 
@@ -150,14 +158,14 @@ const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
             <ReviewsList reviews={reviews}/>
           </div>
         </div>
-        <Map offers={offers} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
       </section>
 
       <div className="container">
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-          <PlaceCards offers={offers} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListNear} itemClassName={PropertyClassName.PlaceCardItemNear}/>
+          <PlaceCards offers={offersNear} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListNear} itemClassName={PropertyClassName.PlaceCardItemNear}/>
         </section>
       </div>
     </main>

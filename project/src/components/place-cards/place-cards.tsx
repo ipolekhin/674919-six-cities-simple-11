@@ -13,7 +13,7 @@ const PlaceCards = ({offers, onSetActiveOffer, listClassName, itemClassName}: Pl
   <div className={`${listClassName} places__list`}>
     {
       offers && offers.map((offer) => (
-        <PlaceCard offer={offer} onSetActiveOffer={onSetActiveOffer} key={offer.id}/>
+        <PlaceCard offer={offer} onSetActiveOffer={onSetActiveOffer} itemClassName={itemClassName} key={offer.id}/>
       ))
     }
   </div>
