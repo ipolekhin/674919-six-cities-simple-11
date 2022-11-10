@@ -9,6 +9,13 @@ const Form = (): JSX.Element => {
     setFormData({...formData, [name]: value});
   };
 
+  // const handleChangeForm = (evt: ChangeEvent<HTMLFormElement>) => {
+  //   evt.preventDefault();
+  //   const {name, value} = evt.target;
+  //   console.log(name);
+  //   console.log(value);
+  //   setFormData({...formData, [name]: value});
+  // };
   const isSendForm: boolean = (formData.review.length >= 50 && formData.rating.length !== 0);
 
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
