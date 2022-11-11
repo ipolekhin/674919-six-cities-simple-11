@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import PlaceCards from '../../components/place-cards/place-cards';
 import {Offer} from '../../types/offers';
 import Map from '../../components/map/map';

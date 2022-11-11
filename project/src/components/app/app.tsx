@@ -14,26 +14,23 @@ type AppProps = {
   reviews: Reviews;
 };
 
-const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
+const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => (
+  <BrowserRouter>
+    <Routes>
+      <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
+        <Route index element={<Main/>}/>
 
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
-          <Route index element={<Main/>}/>
+        <Route path={AppRoute.Login} element={<Login/>}/>
 
-          <Route path={AppRoute.Login} element={<Login/>}/>
+        <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
+      </Route>
 
-          <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
-        </Route>
-
-        <Route
-          path='*'
-          element={<PageNotExist/>}
-        />
-      </Routes>
-    </BrowserRouter>
-  );
-};
+      <Route
+        path='*'
+        element={<PageNotExist/>}
+      />
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;
