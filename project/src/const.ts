@@ -40,3 +40,5 @@ export enum PropertyClassName {
   PlaceCardListCities = 'cities__places-list tabs__content',
   PlaceCardItemCities = 'cities',
 }
+
+export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];

@@ -14,6 +14,7 @@ type OfferProps = {
 
 const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
   const params = useParams();
+  console.log(params);
   const currentOffer = offers.find((offer) => String(offer.id) === params.id);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 

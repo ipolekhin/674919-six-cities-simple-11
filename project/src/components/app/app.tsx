@@ -10,28 +10,30 @@ import {Reviews} from '../../types/reviews';
 
 type AppProps = {
   authorizationStatus: string;
-  countPlaces: number;
   offers: Offers;
   reviews: Reviews;
 };
 
-const App = ({authorizationStatus, countPlaces, offers, reviews}: AppProps): JSX.Element => (
-  <BrowserRouter>
-    <Routes>
-      <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
-        <Route index element={<Main countPlaces={countPlaces} offers={offers}/>}/>
+const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
 
-        <Route path={AppRoute.Login} element={<Login/>}/>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
+          <Route index element={<Main/>}/>
 
-        <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
-      </Route>
+          <Route path={AppRoute.Login} element={<Login/>}/>
 
-      <Route
-        path='*'
-        element={<PageNotExist/>}
-      />
-    </Routes>
-  </BrowserRouter>
-);
+          <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
+        </Route>
+
+        <Route
+          path='*'
+          element={<PageNotExist/>}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default App;
