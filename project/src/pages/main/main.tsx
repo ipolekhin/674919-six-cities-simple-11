@@ -6,15 +6,21 @@ import {City, PropertyClassName} from '../../const';
 import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks';
 import MainEmpty from '../main-empty/main-empty';
+import PlacesSorting from '../../components/places-sortting/places-sorting';
+import {getSortedOffers} from '../../utils/utils';
 
 const Main = (): JSX.Element => {
   const activeCity = useAppSelector((state) => state.city);
   const offersReducer = useAppSelector((state) => state.offers);
+  const currentSortName = useAppSelector((state) => state.sortName);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
-  const offersOfCity = offersReducer.slice().filter((offer: Offer) => offer.city.name === activeCity);
+  let offersOfCity = offersReducer.slice().filter((offer: Offer) => offer.city.name === activeCity);
+  offersOfCity = getSortedOffers(offersOfCity, currentSortName);
+
+  const emptyCityClass = !offersOfCity.length ? 'page__main--index-empty' : '';
 
   return (
-    <main className={`page__main page__main--index ${(offersOfCity.length === 0) ? 'page__main--index-empty' : ''}`}>
+    <main className={`page__main page__main--index ${emptyCityClass}`}>
       <h1 className="visually-hidden">Cities</h1>
 
       <div className="tabs">
@@ -32,27 +38,9 @@ const Main = (): JSX.Element => {
 
                 <b className="places__found">{offersOfCity.length} places to stay in {activeCity}</b>
 
-                <form className="places__sorting" action="#" method="get">
-                  <span className="places__sorting-caption">Sort by</span>
-
-                  <span className="places__sorting-type" tabIndex={0}>
-                    Popular
-
-                    <svg className="places__sorting-arrow" width="7" height="4">
-                      <use xlinkHref="#icon-arrow-select"></use>
-                    </svg>
-                  </span>
-
-                  <ul className="places__options places__options--custom places__options--opened">
-                    <li className="places__option places__option--active" tabIndex={0}>Popular</li>
-
-                    <li className="places__option" tabIndex={0}>Price: low to high</li>
-
-                    <li className="places__option" tabIndex={0}>Price: high to low</li>
-
-                    <li className="places__option" tabIndex={0}>Top rated first</li>
-                  </ul>
-                </form>
+                <PlacesSorting
+                  currentSortName={currentSortName}
+                />
 
                 <PlaceCards offers={offersOfCity} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListCities} itemClassName={PropertyClassName.PlaceCardItemCities}/>
               </section>
