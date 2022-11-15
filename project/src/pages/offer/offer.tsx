@@ -37,11 +37,13 @@ const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
       <section className="property">
         <div className="property__gallery-container container">
           <div className="property__gallery">
-            { imagesSliced?.map((imageSrc:string, index:number) => (
-              <div className="property__image-wrapper" data-key={`${imageSrc}`} key={`${imageSrc} ${String(index)}`}>
-                <img className="property__image" src={imageSrc} alt={title}/>
-              </div>
-            ))}
+            {imagesSliced?.map((imageSrc, index) => {
+              const ketValue = `image-${index}`;
+              return (
+                <div className="property__image-wrapper" data-key={`${imageSrc}`} key={ketValue}>
+                  <img className="property__image" src={imageSrc} alt={title}/>
+                </div>);
+            })}
           </div>
         </div>
 

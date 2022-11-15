@@ -7,6 +7,9 @@ import PageNotExist from '../../pages/page-not-exist/page-not-exist';
 import Layout from '../layout/layout';
 import {Offers} from '../../types/offers';
 import {Reviews} from '../../types/reviews';
+import {useEffect} from 'react';
+import {useAppDispatch} from '../../hooks';
+import {setOffers} from '../../store/action';
 
 type AppProps = {
   authorizationStatus: string;
@@ -14,23 +17,31 @@ type AppProps = {
   reviews: Reviews;
 };
 
-const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => (
-  <BrowserRouter>
-    <Routes>
-      <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
-        <Route index element={<Main/>}/>
+const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
+  const dispatch = useAppDispatch();
 
-        <Route path={AppRoute.Login} element={<Login/>}/>
+  useEffect(() => {
+    dispatch(setOffers(offers));
+  },[]);
 
-        <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
-      </Route>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
+          <Route index element={<Main/>}/>
 
-      <Route
-        path='*'
-        element={<PageNotExist/>}
-      />
-    </Routes>
-  </BrowserRouter>
-);
+          <Route path={AppRoute.Login} element={<Login/>}/>
+
+          <Route path={AppRoute.Offer} element={<OfferPage offers={offers} reviews={reviews}/>}/>
+        </Route>
+
+        <Route
+          path='*'
+          element={<PageNotExist/>}
+        />
+      </Routes>
+    </BrowserRouter>
+  );
+};
 
 export default App;

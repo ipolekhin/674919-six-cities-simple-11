@@ -1,10 +1,11 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {changeCity, setOffers} from './action';
 import {Cities} from '../const';
+import {Offers} from '../types/offers';
 
 const initialState = {
   city: Cities[0],
-  offers: [],
+  offers: [] as Offers,
 };
 
 const reducer = createReducer(initialState, (builder) => {
