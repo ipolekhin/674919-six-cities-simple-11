@@ -42,3 +42,18 @@ export enum PropertyClassName {
 }
 
 export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export enum SortType {
+  Popular = 'Popular',
+  POPULAR = 'Popular',
+  PRICE_LOW = 'Price: low to high',
+  PRICE_HIGH = 'Price: high to low',
+  TOP_RATED_FIRST = 'Top rated first',
+}
+
+export const SORT_NAMES: string[] = [
+  SortType.POPULAR,
+  SortType.PRICE_LOW,
+  SortType.PRICE_HIGH,
+  SortType.TOP_RATED_FIRST,
+];
