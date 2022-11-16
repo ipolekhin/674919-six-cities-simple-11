@@ -5,11 +5,10 @@ import Login from '../../pages/login/login';
 import OfferPage from '../../pages/offer/offer';
 import PageNotExist from '../../pages/page-not-exist/page-not-exist';
 import Layout from '../layout/layout';
+import LoadingScreen from '../loading-screen/loading-screen.';
 import {Offers} from '../../types/offers';
 import {Reviews} from '../../types/reviews';
-import {useEffect} from 'react';
-import {useAppDispatch} from '../../hooks';
-import {setOffers} from '../../store/action';
+import {useAppSelector} from '../../hooks';
 
 type AppProps = {
   authorizationStatus: string;
@@ -18,11 +17,13 @@ type AppProps = {
 };
 
 const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
-  const dispatch = useAppDispatch();
+  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
-  useEffect(() => {
-    dispatch(setOffers(offers));
-  },[]);
+  if (isOffersDataLoading) {
+    return (
+      <LoadingScreen/>
+    );
+  }
 
   return (
     <BrowserRouter>
