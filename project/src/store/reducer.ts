@@ -1,6 +1,13 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, loadOffers, setError, setOffersDataLoadingStatus, setSortName} from './action';
-import {Cities, SORT_NAMES} from '../const';
+import {
+  changeCity,
+  loadOffers,
+  requireAuthorization,
+  setError,
+  setOffersDataLoadingStatus,
+  setSortName
+} from './action';
+import {AuthorizationStatus, Cities, SORT_NAMES} from '../const';
 import {Offers} from '../types/offers';
 
 const initialState = {
@@ -9,6 +16,7 @@ const initialState = {
   sortName: SORT_NAMES[0],
   isOffersDataLoading: false,
   error: null as string | null,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -27,6 +35,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
 
