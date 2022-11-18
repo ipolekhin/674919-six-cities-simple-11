@@ -18,7 +18,6 @@ type AppProps = {
 
 const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
-
   if (isOffersDataLoading) {
     return (
       <LoadingScreen/>
