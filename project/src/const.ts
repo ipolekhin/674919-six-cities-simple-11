@@ -57,3 +57,11 @@ export const SORT_NAMES: string[] = [
   SortType.PRICE_HIGH,
   SortType.TOP_RATED_FIRST,
 ];
+
+export enum APIRoute {
+  Offers = '/hotels',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const TIMEOUT_SHOW_ERROR = 4000;
