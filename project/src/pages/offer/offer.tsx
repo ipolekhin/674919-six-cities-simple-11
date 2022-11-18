@@ -6,6 +6,7 @@ import {useParams} from 'react-router-dom';
 import {Offers, Offer} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
 import {Reviews} from '../../types/reviews';
+import {useAppSelector} from '../../hooks';
 
 type OfferProps = {
   offers: Offers;
@@ -13,6 +14,7 @@ type OfferProps = {
 };
 
 const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
+  const activeCity = useAppSelector((state) => state.city);
   const params = useParams();
   const currentOffer = offers.find((offer) => String(offer.id) === params.id);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
@@ -160,7 +162,7 @@ const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
             <ReviewsList reviews={reviews}/>
           </div>
         </div>
-        <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        <Map activeCity={activeCity} offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
       </section>
 
       <div className="container">

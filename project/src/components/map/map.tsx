@@ -6,6 +6,7 @@ import useMap from '../../hooks/useMap';
 import {Markers} from '../../const';
 
 type MapProps = {
+  activeCity: string;
   offers: Offers;
   city: {
     Title: string;
@@ -17,9 +18,9 @@ type MapProps = {
   elementClassName: string;
 }
 
-const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
+const Map = ({activeCity, offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
+  const map = useMap(activeCity, mapRef, city);
 
   const defaultCustomIcon = new Icon({
     iconUrl: Markers.Default,
@@ -34,15 +35,17 @@ const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Eleme
   });
 
   useEffect(() => {
+    const markers: Marker[] = [];
+    const markerCoordinateList: [number, number][] = [];
+
     if (map) {
-      const markers: [number, number][] = [];
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
           lng: offer.location.longitude
         });
 
-        markers.push([offer.location.latitude, offer.location.longitude]);
+        markerCoordinateList.push([offer.location.latitude, offer.location.longitude]);
 
         marker
           .setIcon(
@@ -51,9 +54,19 @@ const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Eleme
               : defaultCustomIcon
           )
           .addTo(map);
+
+        markers.push(marker);
       });
-      map.fitBounds(markers, {padding: [20, 20]});
+
+      map.fitBounds(markerCoordinateList, {padding: [20, 20]});
+      // map.fitBounds(markers, {padding: [20, 20]});
     }
+
+    return () => {
+      if (map) {
+        markers.forEach((marker) => marker.removeFrom(map));
+      }
+    };
   }, [map, offers, activeOffer]);
 
   return (

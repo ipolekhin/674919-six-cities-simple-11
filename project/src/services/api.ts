@@ -1,7 +1,7 @@
 import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {StatusCodes} from 'http-status-codes';
 import processErrorHandle from './process-error-handle';
-import {getToken} from "./token.";
+import {getToken} from './token.';
 
 const BACKEND_URL = 'https://11.react.pages.academy/six-cities-simple';
 const REQUEST_TIMEOUT = 5000;
@@ -33,7 +33,7 @@ export const createAPI = (): AxiosInstance => {
 
   api.interceptors.request.use(
     (config: AxiosRequestConfig) => {
-      const token = 'sfsdfsdf';
+      const token = getToken();
 
       if (token && config.headers) {
         config.headers['x-token'] = token;

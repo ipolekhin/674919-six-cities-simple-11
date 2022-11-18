@@ -2,7 +2,7 @@ import {createReducer} from '@reduxjs/toolkit';
 import {
   changeCity,
   loadOffers,
-  requireAuthorization,
+  requireAuthorization, setAuthorizationLogin,
   setError,
   setOffersDataLoadingStatus,
   setSortName
@@ -17,6 +17,7 @@ const initialState = {
   isOffersDataLoading: false,
   error: null as string | null,
   authorizationStatus: AuthorizationStatus.Unknown,
+  login: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -38,6 +39,9 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;
+    })
+    .addCase(setAuthorizationLogin, (state, action) => {
+      state.login = action.payload;
     });
 });
 

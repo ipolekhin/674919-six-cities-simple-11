@@ -1,12 +1,11 @@
 import React from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, PageModifierClassType} from '../../const';
+import {useAppSelector} from '../../hooks';
 
-type LayoutProps = {
-  authorizationStatus: string;
-}
-
-const Layout = ({authorizationStatus}: LayoutProps): JSX.Element => {
+const Layout = (): JSX.Element => {
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const login = useAppSelector((state) => state.login);
   const params = useLocation();
   const pageClassName = PageModifierClassType[params.pathname];
 
@@ -35,7 +34,7 @@ const Layout = ({authorizationStatus}: LayoutProps): JSX.Element => {
                       <div className="header__nav-profile">
                         <div className="header__avatar-wrapper user__avatar-wrapper"></div>
 
-                        <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
+                        <span className="header__user-name user__name">{login}</span>
                       </div>
                     </li>}
 
