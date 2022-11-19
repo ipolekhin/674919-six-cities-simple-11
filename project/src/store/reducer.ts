@@ -7,13 +7,13 @@ import {
   setOffersDataLoadingStatus,
   setSortName
 } from './action';
-import {AuthorizationStatus, Cities, SORT_NAMES} from '../const';
+import {AuthorizationStatus, Cities, SortList} from '../const';
 import {Offers} from '../types/offers';
 
 const initialState = {
   city: Cities[0],
   offers: [] as Offers | never[],
-  sortName: SORT_NAMES[0],
+  sortName: SortList.POPULAR as string,
   isOffersDataLoading: false,
   error: null as string | null,
   authorizationStatus: AuthorizationStatus.Unknown,

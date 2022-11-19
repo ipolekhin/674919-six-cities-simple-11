@@ -20,30 +20,16 @@ const Login = (): JSX.Element => {
     }
   }, [authorizationStatus]);
 
-  // const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
-  //   evt.preventDefault();
-  //
-  //   if (loginRef.current !== null && passwordRef !== null) {
-  //     const authData: AuthData = {
-  //       login: loginRef.current.value,
-  //       password: passwordRef.current.value,
-  //     };
-  //
-  //     dispatch(loginAction(authData));
-  //   }
-  // };
-
-  const onSubmit = (authData: AuthData) => {
-    dispatch(loginAction(authData));
-  };
-
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
+      const authData: AuthData = {
         login: loginRef.current.value,
         password: passwordRef.current.value,
-      });
+      };
+
+      dispatch(loginAction(authData));
     }
   };
 

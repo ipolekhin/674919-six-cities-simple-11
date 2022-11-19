@@ -59,7 +59,6 @@ const Map = ({activeCity, offers, city, activeOffer, elementClassName}: MapProps
       });
 
       map.fitBounds(markerCoordinateList, {padding: [20, 20]});
-      // map.fitBounds(markers, {padding: [20, 20]});
     }
 
     return () => {
