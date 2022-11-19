@@ -1,14 +1,23 @@
 import {createReducer} from '@reduxjs/toolkit';
-import {changeCity, loadOffers, setError, setOffersDataLoadingStatus, setSortName} from './action';
-import {Cities, SORT_NAMES} from '../const';
+import {
+  changeCity,
+  loadOffers,
+  requireAuthorization, setAuthorizationLogin,
+  setError,
+  setOffersDataLoadingStatus,
+  setSortName
+} from './action';
+import {AuthorizationStatus, Cities, SortList} from '../const';
 import {Offers} from '../types/offers';
 
 const initialState = {
   city: Cities[0],
   offers: [] as Offers | never[],
-  sortName: SORT_NAMES[0],
+  sortName: SortList.POPULAR as string,
   isOffersDataLoading: false,
   error: null as string | null,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  login: '',
 };
 
 const reducer = createReducer(initialState, (builder) => {
@@ -27,6 +36,12 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setError, (state, action) => {
       state.error = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setAuthorizationLogin, (state, action) => {
+      state.login = action.payload;
     });
 });
 

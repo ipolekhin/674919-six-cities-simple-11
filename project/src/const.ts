@@ -41,22 +41,32 @@ export enum PropertyClassName {
   PlaceCardItemCities = 'cities',
 }
 
-export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
-
-export enum SortType {
-  Popular = 'Popular',
-  POPULAR = 'Popular',
-  PRICE_LOW = 'Price: low to high',
-  PRICE_HIGH = 'Price: high to low',
-  TOP_RATED_FIRST = 'Top rated first',
+export enum CitiesType {
+  PARIS = 'Paris',
+  COLOGNE = 'Cologne',
+  BRUSSELS = 'Brussels',
+  AMSTERDAM = 'Amsterdam',
+  HAMBURG = 'Hamburg',
+  DUSSELDORF = 'Dusseldorf',
 }
 
-export const SORT_NAMES: string[] = [
-  SortType.POPULAR,
-  SortType.PRICE_LOW,
-  SortType.PRICE_HIGH,
-  SortType.TOP_RATED_FIRST,
-];
+// export const CitiesCoordinates: {[key: string]: string} = {
+//   [CitiesType.PARIS]: [48.853, 2.348],
+//   [CitiesType.COLOGNE]: [48.853, 2.348],
+//   [CitiesType.BRUSSELS]: [48.853, 2.348],
+//   [CitiesType.AMSTERDAM]: [48.853, 2.348],
+//   [CitiesType.HAMBURG]: [48.853, 2.348],
+//   [CitiesType.DUSSELDORF]: [48.853, 2.348],
+// } as const;
+
+export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
+
+export const SortList = {
+  POPULAR: 'Popular',
+  PRICE_LOW: 'Price: low to high',
+  PRICE_HIGH: 'Price: high to low',
+  TOP_RATED_FIRST: 'Top rated first',
+} as const;
 
 export enum APIRoute {
   Offers = '/hotels',

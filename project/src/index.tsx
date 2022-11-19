@@ -6,24 +6,20 @@ import App from './components/app/app';
 import {offers} from './mocks/offers';
 import {reviews} from './mocks/reviews';
 import {store} from './store';
-import {fetchOffersAction} from './store/api';
+import {checkAuthAction, fetchOffersAction} from './store/api';
 
 store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
-
-const Store = {
-  AuthorizationStatus: 'NO_AUTH',
-} as const;
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage/>
       <App
-        authorizationStatus={Store.AuthorizationStatus}
         offers={offers}
         reviews={reviews}
       />

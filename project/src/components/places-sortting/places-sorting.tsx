@@ -1,5 +1,5 @@
 import React, {useState, MouseEvent} from 'react';
-import {SORT_NAMES} from '../../const';
+import {SortList} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {setSortName} from '../../store/action';
 
@@ -35,7 +35,7 @@ const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
 
       <ul className={`places__options places__options--custom ${isSortOpen ? 'places__options--opened' : ''}`}>
         {
-          SORT_NAMES.map((sortName) => (
+          Object.values(SortList).map((sortName) => (
             <li className={`places__option ${(currentSortName === sortName) ? 'places__option--active' : ''}`} onClick={handleClickSort} key={sortName} tabIndex={0}>{sortName}</li>
           ))
         }

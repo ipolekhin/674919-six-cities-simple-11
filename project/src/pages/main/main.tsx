@@ -46,7 +46,7 @@ const Main = (): JSX.Element => {
               </section>
 
               <div className="cities__right-section">
-                <Map offers={offersOfCity} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageMain}/>
+                <Map activeCity={activeCity} offers={offersOfCity} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageMain}/>
               </div>
             </div>
           </div>

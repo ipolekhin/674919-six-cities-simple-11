@@ -11,12 +11,11 @@ import {Reviews} from '../../types/reviews';
 import {useAppSelector} from '../../hooks';
 
 type AppProps = {
-  authorizationStatus: string;
   offers: Offers;
   reviews: Reviews;
 };
 
-const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
+const App = ({offers, reviews}: AppProps): JSX.Element => {
   const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
 
   if (isOffersDataLoading) {
@@ -28,7 +27,7 @@ const App = ({authorizationStatus, offers, reviews}: AppProps): JSX.Element => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoute.Main} element={<Layout authorizationStatus={authorizationStatus}/>}>
+        <Route path={AppRoute.Main} element={<Layout/>}>
           <Route index element={<Main/>}/>
 
           <Route path={AppRoute.Login} element={<Login/>}/>
