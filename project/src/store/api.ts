@@ -1,25 +1,90 @@
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state';
-import {Offers} from '../types/offers';
-import {loadOffers, requireAuthorization, setAuthorizationLogin, setError, setOffersDataLoadingStatus} from './action';
-import {APIRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
+import {Offer, Offers} from '../types/offers';
+import {
+  loadOffer,
+  loadOffers,
+  loadOffersNear,
+  loadReviewsOfOffer,
+  redirectToRoute,
+  requireAuthorization, sendFormReview,
+  setAuthorizationLogin,
+  setError,
+  setOffersDataLoadingStatus
+} from './action';
+import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR} from '../const';
 import {store} from './index';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 import {dropToken, saveToken} from '../services/token.';
+import {ReviewForm, Reviews} from '../types/reviews';
 
 export const fetchOffersAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchOffer',
+  'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
     dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offers>(APIRoute.Offers);
     dispatch(loadOffers(data));
     dispatch(setOffersDataLoadingStatus(false));
+  },
+);
+
+export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffer',
+  async (id, {dispatch, extra: api}) => {
+    try {
+      const { data } = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+      dispatch(loadOffer(data));
+      dispatch(fetchOffersNearAction(id));
+      dispatch(fetchReviewsOfOffersAction(id));
+    } catch {
+      dispatch(redirectToRoute(AppRoute.PageNotExist));
+    }
+  },
+);
+
+export const fetchOffersNearAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffersNear',
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Offers>(`${APIRoute.Offers}/${id}/nearby`);
+    dispatch(loadOffersNear(data));
+  },
+);
+
+export const fetchReviewsOfOffersAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchOffersNear',
+  async (id, {dispatch, extra: api}) => {
+    const { data } = await api.get<Reviews>(`${APIRoute.Comments}/${id}`);
+    dispatch(loadReviewsOfOffer(data));
+  },
+);
+
+export const sendReviewOfOfferAction = createAsyncThunk<void, ReviewForm, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/sendReviewOfOffersAction',
+  async ({comment, rating}, {dispatch, extra: api}) => {
+    const { data } = await api.post<Reviews>(`${APIRoute.Comments}/20`);
+    dispatch(loadReviewsOfOffer(data));
   },
 );
 
@@ -41,9 +106,9 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const response = await api.get<UserData>(APIRoute.Login);
+      const {data : {email}} = await api.get<UserData>(APIRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
-      dispatch(setAuthorizationLogin(response.data.email));
+      dispatch(setAuthorizationLogin(email));
     } catch {
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     }
@@ -64,7 +129,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   },
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, {
+export const logOutAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -74,5 +139,6 @@ export const logoutAction = createAsyncThunk<void, undefined, {
     await api.delete(APIRoute.Logout);
     dropToken();
     dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    dispatch(setAuthorizationLogin(''));
   },
 );

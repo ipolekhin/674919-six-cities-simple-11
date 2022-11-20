@@ -1,13 +1,20 @@
-import React from 'react';
+import React, {MouseEvent} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, PageModifierClassType} from '../../const';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {logOutAction} from '../../store/api';
 
 const Layout = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const login = useAppSelector((state) => state.login);
   const params = useLocation();
   const pageClassName = PageModifierClassType[params.pathname];
+
+  const HandleLogout = (evt: MouseEvent<HTMLAnchorElement>) => {
+    evt.preventDefault();
+    dispatch(logOutAction());
+  };
 
   return (
     <div className={`page ${pageClassName ? pageClassName : ''}`}>
@@ -39,9 +46,17 @@ const Layout = (): JSX.Element => {
                     </li>}
 
                   <li className="header__nav-item">
-                    <Link className="header__nav-link" to={authorizationStatus !== AuthorizationStatus.Auth ? '/login' : '#'}>
-                      <span className="header__signout">Sign{authorizationStatus !== AuthorizationStatus.Auth ? ' in' : ' out'}</span>
-                    </Link>
+                    {
+                      authorizationStatus !== AuthorizationStatus.Auth ?
+                        <Link className="header__nav-link" to={AppRoute.Login}>
+                          <span className="header__signout">Sign in</span>
+                        </Link>
+                        :
+
+                        <a className="header__nav-link" href="#" onClick={HandleLogout}>
+                          <span className="header__signout">Sign out</span>
+                        </a>
+                    }
                   </li>
                 </ul>
               </nav>}

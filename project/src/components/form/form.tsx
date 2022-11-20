@@ -1,7 +1,10 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {FiveStar} from '../../const';
+import {useAppDispatch} from '../../hooks';
+import {sendReviewOfOfferAction} from "../../store/api";
 
 const Form = (): JSX.Element => {
+  const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({rating: '', review: ''});
 
   const handleChangeForm = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -20,6 +23,7 @@ const Form = (): JSX.Element => {
 
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    dispatch(sendReviewOfOfferAction(formData));
   };
 
   return (

@@ -2,6 +2,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   Offer= '/offer/:id',
+  PageNotExist= '/404',
 }
 
 export const PageModifierClassType: {[key: string]: string} = {
@@ -70,8 +71,10 @@ export const SortList = {
 
 export enum APIRoute {
   Offers = '/hotels',
+  Offer = '/hotels/:id',
   Login = '/login',
   Logout = '/logout',
+  Comments = '/comments',
 }
 
 export const TIMEOUT_SHOW_ERROR = 4000;

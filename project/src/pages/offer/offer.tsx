@@ -1,37 +1,34 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
 import {useParams} from 'react-router-dom';
-import {Offers, Offer} from '../../types/offers';
+import {Offer} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
-import {Reviews} from '../../types/reviews';
-import {useAppSelector} from '../../hooks';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {fetchOfferAction} from '../../store/api';
 
-type OfferProps = {
-  offers: Offers;
-  reviews: Reviews;
-};
+const OfferPage = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const offer = useAppSelector((state) => state.offer);
+  const offersNear = useAppSelector((state) => state.offersNear);
 
-const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
-  const activeCity = useAppSelector((state) => state.city);
   const params = useParams();
-  const currentOffer = offers.find((offer) => String(offer.id) === params.id);
+  useEffect(() => {
+    if (offer === null || String(offer.id) !== params.id) {
+      dispatch(fetchOfferAction(params.id));
+    }
+  }, []);
+  // const currentOffer = offers.find((offer) => String(offer.id) === params.id);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
-  if (!currentOffer) {
+  if (!offer) {
     return <div>Такого офера нет</div>;
   }
 
-  const {id, images, isPremium, price, title, type, rating} = currentOffer;
+  const {id, images, isPremium, price, title, type, rating} = offer;
   const imagesSliced = images.slice(1, 7);
-  let countOffersNear = 5;
-  const offersNear = offers.filter((item, index) => {
-    if (item.id !== id) {
-      countOffersNear--;
-    }
-    return item.id !== id && countOffersNear > 0;
-  });
+
   const ratingPercent = Ratings[Math.round(rating) - 1];
 
   return (
@@ -159,10 +156,10 @@ const OfferPage = ({offers, reviews}: OfferProps): JSX.Element => {
               </div>
             </div>
 
-            <ReviewsList reviews={reviews}/>
+            <ReviewsList/>
           </div>
         </div>
-        <Map activeCity={activeCity} offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
       </section>
 
       <div className="container">
