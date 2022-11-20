@@ -1,26 +1,31 @@
 import React from 'react';
 import ReviewsItem from '../reviews-item/reviews-item';
 import Form from '../form/form';
-import {Reviews} from '../../types/reviews';
+import {useAppSelector} from '../../hooks';
+import {AuthorizationStatus} from '../../const';
 
-type ReviewsListProps = {
-  reviews: Reviews;
-};
+const ReviewsList = (): JSX.Element => {
+  const reviews = useAppSelector((state) => state.reviewsOfOffer);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-const ReviewsList = ({reviews}: ReviewsListProps): JSX.Element => (
-  <section className="property__reviews reviews">
-    <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+  return (
+    <section className="property__reviews reviews">
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
 
-    <ul className="reviews__list">
+      <ul className="reviews__list">
+        {
+          reviews.map((review) => (
+            <ReviewsItem key={review.id} review={review}/>
+          ))
+        }
+      </ul>
+
       {
-        reviews.map((review) => (
-          <ReviewsItem key={review.id} review={review}/>
-        ))
+        authorizationStatus === AuthorizationStatus.Auth
+          && <Form/>
       }
-    </ul>
-
-    <Form/>
-  </section>
-);
+    </section>
+  );
+};
 
 export default ReviewsList;
