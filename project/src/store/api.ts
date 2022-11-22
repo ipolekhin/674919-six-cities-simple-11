@@ -82,8 +82,8 @@ export const sendReviewOfOfferAction = createAsyncThunk<void, ReviewForm, {
   extra: AxiosInstance;
 }>(
   'data/sendReviewOfOffersAction',
-  async ({comment, rating}, {dispatch, extra: api}) => {
-    const { data } = await api.post<Reviews>(`${APIRoute.Comments}/20`);
+  async ({review, rating}, {dispatch, extra: api}) => {
+    const { data } = await api.post<Reviews>(`${APIRoute.Comments}/20`, {comment: review, rating});
     dispatch(loadReviewsOfOffer(data));
   },
 );
