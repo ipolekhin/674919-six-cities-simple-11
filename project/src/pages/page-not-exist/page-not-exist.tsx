@@ -62,6 +62,6 @@ const PageNotExist = (): JSX.Element => {
       </main>
     </div>
   );
-}
+};
 
 export default PageNotExist;

@@ -8,7 +8,7 @@ import {
   loadOffersNear,
   loadReviewsOfOffer,
   redirectToRoute,
-  requireAuthorization, sendFormReview,
+  requireAuthorization,
   setAuthorizationLogin,
   setError,
   setOffersDataLoadingStatus
@@ -34,7 +34,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
+export const fetchOfferAction = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -52,7 +52,7 @@ export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
   },
 );
 
-export const fetchOffersNearAction = createAsyncThunk<void, string | undefined, {
+export const fetchOffersNearAction = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -64,7 +64,7 @@ export const fetchOffersNearAction = createAsyncThunk<void, string | undefined, 
   },
 );
 
-export const fetchReviewsOfOffersAction = createAsyncThunk<void, string | undefined, {
+export const fetchReviewsOfOffersAction = createAsyncThunk<void, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;

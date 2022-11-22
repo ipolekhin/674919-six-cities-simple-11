@@ -16,7 +16,7 @@ export type Offer = {
     isPro: boolean;
     name: string;
   };
-  id: string | undefined;
+  id: number;
   images: string[];
   isPremium: boolean;
   location: {
