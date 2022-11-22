@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {FiveStar} from '../../const';
 import {useAppDispatch} from '../../hooks';
-import {sendReviewOfOfferAction} from "../../store/api";
+import {sendReviewOfOfferAction} from '../../store/api';
 
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -23,6 +23,7 @@ const Form = (): JSX.Element => {
 
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    console.log(formData);
     dispatch(sendReviewOfOfferAction(formData));
   };
 
