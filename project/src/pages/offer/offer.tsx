@@ -12,14 +12,13 @@ const OfferPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const offer = useAppSelector((state) => state.offer);
   const offersNear = useAppSelector((state) => state.offersNear);
-
   const params = useParams();
+  const paramsId = Number(params.id);
   useEffect(() => {
-    if (offer === null || String(offer.id) !== params.id) {
-      dispatch(fetchOfferAction(params.id));
+    if (offer === null || offer.id !== paramsId) {
+      dispatch(fetchOfferAction(paramsId));
     }
-  }, []);
-  // const currentOffer = offers.find((offer) => String(offer.id) === params.id);
+  }, [offer]);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
   if (!offer) {
@@ -28,7 +27,6 @@ const OfferPage = (): JSX.Element => {
 
   const {id, images, isPremium, price, title, type, rating} = offer;
   const imagesSliced = images.slice(1, 7);
-
   const ratingPercent = Ratings[Math.round(rating) - 1];
 
   return (
