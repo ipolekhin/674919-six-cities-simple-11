@@ -24,7 +24,6 @@ const App = ({offers, reviews}: AppProps): JSX.Element => {
     );
   }
 
-
   return (
     <BrowserRouter>
       <Routes>
