@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, memo} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer, Offers} from '../../types/offers';
@@ -78,4 +78,4 @@ const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Eleme
   );
 };
 
-export default Map;
+export default memo(Map);
