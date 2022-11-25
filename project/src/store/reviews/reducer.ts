@@ -9,23 +9,23 @@ const initialState = {
   reviewsOfOffer: [] as Reviews,
 };
 
-const reviewsReducer = createReducer(initialState, (builder) => {
-  builder
-    .addCase(loadReviewsOfOffer, (state, action) => {
-      state.reviewsOfOffer = action.payload;
-    });
-});
-
-export {reviewsReducer};
-
-// export const reviewsReducer = createSlice({
-//   name: NameSpace.Reviews,
-//   initialState,
-//   reducers: {},
-//   extraReducers(builder) {
-//     builder
-//       .addCase(loadReviewsOfOffer, (state, action) => {
-//         state.reviewsOfOffer = action.payload;
-//       });
-//   },
+// const reviewsReducer = createReducer(initialState, (builder) => {
+//   builder
+//     .addCase(loadReviewsOfOffer, (state, action) => {
+//       state.reviewsOfOffer = action.payload;
+//     });
 // });
+//
+// export {reviewsReducer};
+
+export const reviewsReducer = createSlice({
+  name: NameSpace.Reviews,
+  initialState,
+  reducers: {},
+  extraReducers(builder) {
+    builder
+      .addCase(loadReviewsOfOffer, (state, action) => {
+        state.reviewsOfOffer = action.payload;
+      });
+  },
+});

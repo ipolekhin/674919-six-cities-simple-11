@@ -6,6 +6,6 @@ import {reviewsReducer} from './reviews/reducer';
 
 export const rootReducer = combineReducers({
   [NameSpace.Data]: dataReducer,
-  [NameSpace.Reviews]: reviewsReducer,
+  [NameSpace.Reviews]: reviewsReducer.reducer,
   [NameSpace.User]: userReducer,
 });
