@@ -3,10 +3,13 @@ import ReviewsItem from '../reviews-item/reviews-item';
 import Form from '../form/form';
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../const';
+import {getReviewsOfOffer} from '../../store/reviews/selector';
+import {getAuthorizationStatus} from '../../store/user/selector';
 
 const ReviewsList = (): JSX.Element => {
-  const reviews = useAppSelector((state) => state.reviewsOfOffer);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  console.info('<ReviewsList />: Render');
+  const reviews = useAppSelector(getReviewsOfOffer);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="property__reviews reviews">

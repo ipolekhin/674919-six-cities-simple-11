@@ -1,9 +1,10 @@
-import React, {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState, memo} from 'react';
 import {FiveStar} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/api';
 
 const Form = (): JSX.Element => {
+  console.info('<Form />: Render');
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({rating: '', review: ''});
 
@@ -53,4 +54,5 @@ const Form = (): JSX.Element => {
   );
 };
 
-export default Form;
+// export default Form;
+export default memo(Form);

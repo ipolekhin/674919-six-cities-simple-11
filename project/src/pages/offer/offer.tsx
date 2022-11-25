@@ -7,11 +7,13 @@ import {Offer} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchOfferAction} from '../../store/api';
+import {getOffer, getOffersNear} from '../../store/data/selector';
 
 const OfferPage = (): JSX.Element => {
+  console.info('<OfferPage />: Render');
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.offer);
-  const offersNear = useAppSelector((state) => state.offersNear);
+  const offer = useAppSelector(getOffer);
+  const offersNear = useAppSelector(getOffersNear);
   const params = useParams();
   const paramsId = Number(params.id);
   useEffect(() => {

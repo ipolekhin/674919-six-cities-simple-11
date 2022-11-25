@@ -4,14 +4,16 @@ import {loginAction} from '../../store/api';
 import {AuthData} from '../../types/auth-data';
 import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
+import {getAuthorizationStatus} from '../../store/user/selector';
+import {getCurrentCity} from '../../store/data/selector';
 
 const Login = (): JSX.Element => {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const currentCity = useAppSelector((state) => state.city);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const currentCity = useAppSelector(getCurrentCity);
   const navigate = useNavigate();
 
   useEffect(() => {

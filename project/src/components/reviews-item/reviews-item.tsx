@@ -7,6 +7,7 @@ type ReviewProps = {
 };
 
 const ReviewsItem = ({review}: ReviewProps): JSX.Element => {
+  console.info('<ReviewsItem />: Render');
   const {comment, date, rating, user} = review;
   const ratingPercent = Ratings[Math.round(rating) - 1];
   const dateFormatted = new Date(date);

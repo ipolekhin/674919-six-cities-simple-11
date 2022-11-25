@@ -5,6 +5,7 @@ import {Offer, Offers} from '../../types/offers';
 import useMap from '../../hooks/useMap';
 import {Markers} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {getCurrentCity} from '../../store/data/selector';
 
 type MapProps = {
   offers: Offers;
@@ -19,7 +20,8 @@ type MapProps = {
 }
 
 const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
-  const activeCity = useAppSelector((state) => state.city);
+  console.info('<Map />: Render');
+  const activeCity = useAppSelector(getCurrentCity);
   const mapRef = useRef(null);
   const map = useMap(activeCity, mapRef, city);
 

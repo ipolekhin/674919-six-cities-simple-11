@@ -4,7 +4,8 @@ import {Provider} from 'react-redux';
 import ErrorMessage from './components/error-message/error-message';
 import App from './components/app/app';
 import {store} from './store';
-import {checkAuthAction, fetchOffersAction} from './store/api';
+import {fetchOffersAction} from './store/data/api';
+import {checkAuthAction} from './store/user/api';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());
@@ -14,10 +15,10 @@ const root = ReactDOM.createRoot(
 );
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <ErrorMessage/>
       <App/>
     </Provider>
-  </React.StrictMode>,
+  // </React.StrictMode>
 );

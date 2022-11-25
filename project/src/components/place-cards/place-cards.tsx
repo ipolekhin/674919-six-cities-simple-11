@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import PlaceCard from '../place-card/place-card';
 import {Offer, Offers} from '../../types/offers';
 
@@ -9,14 +9,18 @@ type PlaceCardsProps = {
   itemClassName: string;
 };
 
-const PlaceCards = ({offers, onSetActiveOffer, listClassName, itemClassName}: PlaceCardsProps): JSX.Element => (
-  <div className={`${listClassName} places__list`}>
-    {
-      offers && offers.map((offer) => (
-        <PlaceCard offer={offer} onSetActiveOffer={onSetActiveOffer} itemClassName={itemClassName} key={offer.id}/>
-      ))
-    }
-  </div>
-);
+const PlaceCards = ({offers, onSetActiveOffer, listClassName, itemClassName}: PlaceCardsProps): JSX.Element => {
+  console.info('<PlaceCards />: Render');
+  return (
+    <div className={`${listClassName} places__list`}>
+      {
+        offers && offers.map((offer) => (
+          <PlaceCard offer={offer} onSetActiveOffer={onSetActiveOffer} itemClassName={itemClassName} key={offer.id}/>
+        ))
+      }
+    </div>
+  );
+};
 
-export default PlaceCards;
+// export default PlaceCards;
+export default memo(PlaceCards);

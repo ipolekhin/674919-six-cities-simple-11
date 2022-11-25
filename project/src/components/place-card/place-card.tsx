@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offers';
 
@@ -9,6 +9,7 @@ type PlaceCardProps = {
 };
 
 const PlaceCard = ({offer, onSetActiveOffer, itemClassName}: PlaceCardProps): JSX.Element => {
+  console.info('<PlaceCard />: Render');
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return (
@@ -52,4 +53,4 @@ const PlaceCard = ({offer, onSetActiveOffer, itemClassName}: PlaceCardProps): JS
   );
 };
 
-export default PlaceCard;
+export default memo(PlaceCard);

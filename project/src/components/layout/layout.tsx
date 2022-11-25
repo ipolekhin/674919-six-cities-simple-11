@@ -3,11 +3,12 @@ import {Link, Outlet, useLocation} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, PageModifierClassType} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logOutAction} from '../../store/api';
+import {getAuthorizationStatus, getLogin} from '../../store/user/selector';
 
 const Layout = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const login = useAppSelector((state) => state.login);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const login = useAppSelector(getLogin);
   const params = useLocation();
   const pageClassName = PageModifierClassType[params.pathname];
 
