@@ -1,6 +1,6 @@
 import React, {FormEvent, useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {loginAction} from '../../store/api';
+import {loginAction} from '../../store/user/api';
 import {AuthData} from '../../types/auth-data';
 import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
