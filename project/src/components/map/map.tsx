@@ -4,9 +4,9 @@ import 'leaflet/dist/leaflet.css';
 import {Offer, Offers} from '../../types/offers';
 import useMap from '../../hooks/useMap';
 import {Markers} from '../../const';
+import {useAppSelector} from '../../hooks';
 
 type MapProps = {
-  activeCity: string;
   offers: Offers;
   city: {
     Title: string;
@@ -18,7 +18,8 @@ type MapProps = {
   elementClassName: string;
 }
 
-const Map = ({activeCity, offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
+const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
+  const activeCity = useAppSelector((state) => state.city);
   const mapRef = useRef(null);
   const map = useMap(activeCity, mapRef, city);
 
@@ -58,7 +59,9 @@ const Map = ({activeCity, offers, city, activeOffer, elementClassName}: MapProps
         markers.push(marker);
       });
 
-      map.fitBounds(markerCoordinateList, {padding: [20, 20]});
+      if (markerCoordinateList.length > 0) {
+        map.fitBounds(markerCoordinateList, {padding: [20, 20]});
+      }
     }
 
     return () => {

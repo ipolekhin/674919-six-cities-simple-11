@@ -12,3 +12,8 @@ export type Review = {
 };
 
 export type Reviews = Review[];
+
+export type ReviewForm = {
+  review: string;
+  rating: string;
+};

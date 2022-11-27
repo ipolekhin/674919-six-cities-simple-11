@@ -1,6 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const';
 import {Offer} from '../../types/offers';
 
 type PlaceCardProps = {
@@ -44,7 +43,7 @@ const PlaceCard = ({offer, onSetActiveOffer, itemClassName}: PlaceCardProps): JS
         </div>
 
         <h2 className="place-card__name">
-          <Link to={AppRoute.Offer}>{title}</Link>
+          <Link to={`/offer/${id}`}>{title}</Link>
         </h2>
 
         <p className="place-card__type">{type}</p>
