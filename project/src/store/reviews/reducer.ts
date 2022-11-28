@@ -1,22 +1,12 @@
-import {createReducer, createSlice} from '@reduxjs/toolkit';
-import {
-  loadReviewsOfOffer,
-} from './action';
+import {createSlice} from '@reduxjs/toolkit';
 import {Reviews} from '../../types/reviews';
 import {NameSpace} from '../name-space';
+import {fetchReviewsOfOffersAction, sendReviewOfOfferAction} from './api';
 
 const initialState = {
   reviewsOfOffer: [] as Reviews,
 };
 
-// const reviewsReducer = createReducer(initialState, (builder) => {
-//   builder
-//     .addCase(loadReviewsOfOffer, (state, action) => {
-//       state.reviewsOfOffer = action.payload;
-//     });
-// });
-//
-// export {reviewsReducer};
 
 export const reviewsReducer = createSlice({
   name: NameSpace.Reviews,
@@ -24,7 +14,11 @@ export const reviewsReducer = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder
-      .addCase(loadReviewsOfOffer, (state, action) => {
+      .addCase(fetchReviewsOfOffersAction.fulfilled, (state, action) => {
+        state.reviewsOfOffer = action.payload;
+      });
+    builder
+      .addCase(sendReviewOfOfferAction.fulfilled, (state, action) => {
         state.reviewsOfOffer = action.payload;
       });
   },

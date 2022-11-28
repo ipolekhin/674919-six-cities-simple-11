@@ -17,6 +17,7 @@ const ReviewsList = (): JSX.Element => {
 
       <ul className="reviews__list">
         {
+          reviews &&
           reviews.map((review) => (
             <ReviewsItem key={review.id} review={review}/>
           ))

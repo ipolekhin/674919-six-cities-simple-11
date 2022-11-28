@@ -41,7 +41,7 @@ const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Eleme
     const markers: Marker[] = [];
     const markerCoordinateList: [number, number][] = [];
 
-    if (map) {
+    if (map && offers) {
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
