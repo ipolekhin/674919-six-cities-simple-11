@@ -12,7 +12,7 @@ import {NameSpace} from '../name-space';
 import {Cities, SortList} from '../../const';
 import {fetchOneOfferAction, fetchOffersAction, fetchOffersNearAction} from './api';
 import {Data} from '../../types/state';
-import {changeCity} from "../action";
+import {changeCity, setSortName} from '../action';
 
 const initialState: Data = {
   city: Cities[0],
@@ -55,6 +55,9 @@ export const dataReducer = createSlice({
       })
       .addCase(changeCity, (state, action) => {
         state.city = action.payload;
+      })
+      .addCase(setSortName, (state, action) => {
+        state.sortName = action.payload;
       });
   },
 });
