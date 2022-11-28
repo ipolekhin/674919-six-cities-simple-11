@@ -5,7 +5,7 @@ import ErrorMessage from './components/error-message/error-message';
 import App from './components/app/app';
 import {store} from './store';
 import {fetchOffersAction} from './store/data/api';
-import {checkAuthAction} from './store/user/api';
+import {checkAuthAction} from './store/user-process/api';
 
 store.dispatch(fetchOffersAction());
 store.dispatch(checkAuthAction());

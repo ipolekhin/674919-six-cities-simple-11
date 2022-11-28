@@ -6,8 +6,9 @@ import {useParams} from 'react-router-dom';
 import {Offer} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {fetchOfferAction} from '../../store/api';
+import {fetchOffersNearAction, fetchOneOfferAction} from '../../store/data/api';
 import {getOffer, getOffersNear} from '../../store/data/selector';
+import {fetchReviewsOfOffersAction} from '../../store/reviews/api';
 
 const OfferPage = (): JSX.Element => {
   console.info('<OfferPage />: Render');
@@ -18,7 +19,9 @@ const OfferPage = (): JSX.Element => {
   const paramsId = Number(params.id);
   useEffect(() => {
     if (offer === null || offer.id !== paramsId) {
-      dispatch(fetchOfferAction(paramsId));
+      dispatch(fetchOneOfferAction(paramsId));
+      dispatch(fetchOffersNearAction(paramsId));
+      dispatch(fetchReviewsOfOffersAction(paramsId));
     }
   }, [offer]);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
@@ -159,7 +162,10 @@ const OfferPage = (): JSX.Element => {
             <ReviewsList/>
           </div>
         </div>
-        <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        {
+          offersNear &&
+          <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        }
       </section>
 
       <div className="container">

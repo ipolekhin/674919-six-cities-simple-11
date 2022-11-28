@@ -4,7 +4,7 @@ import Form from '../form/form';
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../const';
 import {getReviewsOfOffer} from '../../store/reviews/selector';
-import {getAuthorizationStatus} from '../../store/user/selector';
+import {getAuthorizationStatus} from '../../store/user-process/selector';
 
 const ReviewsList = (): JSX.Element => {
   console.info('<ReviewsList />: Render');

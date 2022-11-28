@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
 import {logOutAction} from '../../store/api';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getAuthorizationStatus, getLogin} from '../../store/user/selector';
+import {getAuthorizationStatus, getLogin} from '../../store/user-process/selector';
 
 const PageNotExist = (): JSX.Element => {
   const dispatch = useAppDispatch();

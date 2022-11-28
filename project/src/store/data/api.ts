@@ -4,7 +4,6 @@ import {AppDispatch, State} from '../../types/state';
 import {Offer, Offers} from '../../types/offers';
 import {
   loadOffer,
-  loadOffers,
   loadOffersNear,
   redirectToRoute,
   setError,
@@ -13,39 +12,31 @@ import {
 import {APIRoute, AppRoute, TIMEOUT_SHOW_ERROR} from '../../const';
 import {store} from '../index';
 
-export const fetchOffersAction = createAsyncThunk<void, undefined, {
+export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffers',
   async (_arg, {dispatch, extra: api}) => {
-    dispatch(setOffersDataLoadingStatus(true));
     const {data} = await api.get<Offers>(APIRoute.Offers);
-    dispatch(loadOffers(data));
-    dispatch(setOffersDataLoadingStatus(false));
+    return data;
   },
 );
 
-export const fetchOfferAction = createAsyncThunk<void, number, {
+export const fetchOneOfferAction = createAsyncThunk<Offer, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
   'data/fetchOffer',
   async (id, {dispatch, extra: api}) => {
-    try {
-      const { data } = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
-      dispatch(loadOffer(data));
-      dispatch(fetchOffersNearAction(id));
-      // dispatch(fetchReviewsOfOffersAction(id));
-    } catch {
-      dispatch(redirectToRoute(AppRoute.PageNotExist));
-    }
+    const { data } = await api.get<Offer>(`${APIRoute.Offers}/${id}`);
+    return data;
   },
 );
 
-export const fetchOffersNearAction = createAsyncThunk<void, number, {
+export const fetchOffersNearAction = createAsyncThunk<Offers, number, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -53,7 +44,7 @@ export const fetchOffersNearAction = createAsyncThunk<void, number, {
   'data/fetchOffersNear',
   async (id, {dispatch, extra: api}) => {
     const { data } = await api.get<Offers>(`${APIRoute.Offers}/${id}/nearby`);
-    dispatch(loadOffersNear(data));
+    return data;
   },
 );
 

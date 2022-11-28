@@ -2,8 +2,8 @@ import React, {MouseEvent} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, PageModifierClassType} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {getAuthorizationStatus, getLogin} from '../../store/user/selector';
-import {logoutAction} from '../../store/user/api';
+import {getAuthorizationStatus, getLogin} from '../../store/user-process/selector';
+import {logoutAction} from '../../store/user-process/api';
 
 const Layout = (): JSX.Element => {
   const dispatch = useAppDispatch();

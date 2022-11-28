@@ -1,10 +1,10 @@
 import React, {FormEvent, useEffect, useRef} from 'react';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {loginAction} from '../../store/user/api';
+import {getAuthorizationStatus} from '../../store/user-process/selector';
+import {loginAction} from '../../store/user-process/api';
 import {AuthData} from '../../types/auth-data';
 import {Link, useNavigate} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {getAuthorizationStatus} from '../../store/user/selector';
 import {getCurrentCity} from '../../store/data/selector';
 
 const Login = (): JSX.Element => {
