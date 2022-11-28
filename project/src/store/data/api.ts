@@ -2,15 +2,9 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../../types/state';
 import {Offer, Offers} from '../../types/offers';
-import {
-  loadOffer,
-  loadOffersNear,
-  redirectToRoute,
-  setError,
-  setOffersDataLoadingStatus
-} from './action';
-import {APIRoute, AppRoute, TIMEOUT_SHOW_ERROR} from '../../const';
-import {store} from '../index';
+import {APIRoute} from '../../const';
+// import {TIMEOUT_SHOW_ERROR} from '../../const';
+// import {store} from '../index';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   dispatch: AppDispatch;
@@ -48,13 +42,12 @@ export const fetchOffersNearAction = createAsyncThunk<Offers, number, {
   },
 );
 
-
-export const clearErrorAction = createAsyncThunk(
-  'data/clearError',
-  () => {
-    store.dispatch(setOffersDataLoadingStatus(false));
-    setTimeout(
-      () => store.dispatch(setError(null)
-      ), TIMEOUT_SHOW_ERROR);
-  },
-);
+// export const clearErrorAction = createAsyncThunk(
+//   'data/clearError',
+//   () => {
+//     store.dispatch(setOffersDataLoadingStatus(false));
+//     setTimeout(
+//       () => store.dispatch(setError(null)
+//       ), TIMEOUT_SHOW_ERROR);
+//   },
+// );

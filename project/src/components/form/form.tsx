@@ -1,7 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState, memo} from 'react';
 import {FiveStar} from '../../const';
 import {useAppDispatch} from '../../hooks';
-import {sendReviewOfOfferAction} from '../../store/api';
+import {sendReviewOfOfferAction} from '../../store/reviews/api';
 
 const Form = (): JSX.Element => {
   console.info('<Form />: Render');
