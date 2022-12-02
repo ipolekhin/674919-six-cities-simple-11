@@ -1,10 +1,12 @@
-import React, {MouseEvent} from 'react';
+import React, {MouseEvent, memo} from 'react';
 import {Cities} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeCity} from '../../store/action';
+import {getCurrentCity} from '../../store/data/selector';
 
 const CitiesList = (): JSX.Element => {
-  const activeCity = useAppSelector((state) => state.city);
+  console.info('<CitiesList />: Render');
+  const activeCity = useAppSelector(getCurrentCity);
   const dispatch = useAppDispatch();
 
   const handleLinkChangeCity = (evt: MouseEvent<HTMLAnchorElement>, city: string) => {
@@ -27,4 +29,4 @@ const CitiesList = (): JSX.Element => {
   );
 };
 
-export default CitiesList;
+export default memo(CitiesList);

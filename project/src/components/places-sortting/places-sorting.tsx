@@ -1,4 +1,4 @@
-import React, {useState, MouseEvent} from 'react';
+import React, {useState, MouseEvent, memo} from 'react';
 import {SortList} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {setSortName} from '../../store/action';
@@ -8,6 +8,7 @@ type PlacesSortingProps = {
 };
 
 const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
+  console.info('<PlacesSorting />: Render');
   const [isSortOpen, setSortOpen] = useState(false);
   const dispatch = useAppDispatch();
 
@@ -44,4 +45,4 @@ const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
   );
 };
 
-export default PlacesSorting;
+export default memo(PlacesSorting);

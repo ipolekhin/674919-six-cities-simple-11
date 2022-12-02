@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {memo} from 'react';
 import ReviewsItem from '../reviews-item/reviews-item';
 import Form from '../form/form';
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../const';
+import {getReviewsOfOffer} from '../../store/reviews/selector';
+import {getAuthorizationStatus} from '../../store/user-process/selector';
 
 const ReviewsList = (): JSX.Element => {
-  const reviews = useAppSelector((state) => state.reviewsOfOffer);
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  console.info('<ReviewsList />: Render');
+  const reviews = useAppSelector(getReviewsOfOffer).slice(0, 10).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="property__reviews reviews">
@@ -14,6 +17,7 @@ const ReviewsList = (): JSX.Element => {
 
       <ul className="reviews__list">
         {
+          reviews &&
           reviews.map((review) => (
             <ReviewsItem key={review.id} review={review}/>
           ))
@@ -28,4 +32,4 @@ const ReviewsList = (): JSX.Element => {
   );
 };
 
-export default ReviewsList;
+export default memo(ReviewsList);

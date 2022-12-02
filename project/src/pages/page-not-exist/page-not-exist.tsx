@@ -1,17 +1,18 @@
 import React, {MouseEvent} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import {logOutAction} from '../../store/api';
+import {logoutAction} from '../../store/user-process/api';
 import {useAppDispatch, useAppSelector} from '../../hooks';
+import {getAuthorizationStatus, getLogin} from '../../store/user-process/selector';
 
 const PageNotExist = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const login = useAppSelector((state) => state.login);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const login = useAppSelector(getLogin);
 
   const HandleLogout = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
-    dispatch(logOutAction());
+    dispatch(logoutAction());
   };
 
   return (

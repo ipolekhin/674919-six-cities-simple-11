@@ -6,17 +6,22 @@ import {useParams} from 'react-router-dom';
 import {Offer} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {fetchOfferAction} from '../../store/api';
+import {fetchOffersNearAction, fetchOneOfferAction} from '../../store/data/api';
+import {getOffer, getOffersNear} from '../../store/data/selector';
+import {fetchReviewsOfOffersAction} from '../../store/reviews/api';
 
 const OfferPage = (): JSX.Element => {
+  console.info('<OfferPage />: Render');
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.offer);
-  const offersNear = useAppSelector((state) => state.offersNear);
+  const offer = useAppSelector(getOffer);
+  const offersNear = useAppSelector(getOffersNear);
   const params = useParams();
   const paramsId = Number(params.id);
   useEffect(() => {
     if (offer === null || offer.id !== paramsId) {
-      dispatch(fetchOfferAction(paramsId));
+      dispatch(fetchOneOfferAction(paramsId));
+      dispatch(fetchOffersNearAction(paramsId));
+      dispatch(fetchReviewsOfOffersAction(paramsId));
     }
   }, [offer]);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
@@ -26,7 +31,7 @@ const OfferPage = (): JSX.Element => {
   }
 
   const {id, images, isPremium, price, title, type, rating} = offer;
-  const imagesSliced = images.slice(1, 7);
+  const imagesSliced = images.slice(0, 6);
   const ratingPercent = Ratings[Math.round(rating) - 1];
 
   return (
@@ -157,7 +162,10 @@ const OfferPage = (): JSX.Element => {
             <ReviewsList/>
           </div>
         </div>
-        <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        {
+          offersNear &&
+          <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+        }
       </section>
 
       <div className="container">

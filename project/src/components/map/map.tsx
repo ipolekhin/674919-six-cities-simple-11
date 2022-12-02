@@ -1,10 +1,11 @@
-import React, {useRef, useEffect} from 'react';
+import React, {useRef, useEffect, memo} from 'react';
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {Offer, Offers} from '../../types/offers';
 import useMap from '../../hooks/useMap';
 import {Markers} from '../../const';
 import {useAppSelector} from '../../hooks';
+import {getCurrentCity} from '../../store/data/selector';
 
 type MapProps = {
   offers: Offers;
@@ -19,7 +20,8 @@ type MapProps = {
 }
 
 const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
-  const activeCity = useAppSelector((state) => state.city);
+  console.info('<Map />: Render');
+  const activeCity = useAppSelector(getCurrentCity);
   const mapRef = useRef(null);
   const map = useMap(activeCity, mapRef, city);
 
@@ -39,7 +41,7 @@ const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Eleme
     const markers: Marker[] = [];
     const markerCoordinateList: [number, number][] = [];
 
-    if (map) {
+    if (map && offers) {
       offers.forEach((offer) => {
         const marker = new Marker({
           lat: offer.location.latitude,
@@ -76,4 +78,4 @@ const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Eleme
   );
 };
 
-export default Map;
+export default memo(Map);

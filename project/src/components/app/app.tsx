@@ -6,12 +6,15 @@ import OfferPage from '../../pages/offer/offer';
 import PageNotExist from '../../pages/page-not-exist/page-not-exist';
 import Layout from '../layout/layout';
 import LoadingScreen from '../loading-screen/loading-screen.';
-import {useAppSelector} from '../../hooks';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import {useAppSelector} from '../../hooks';
+import {getOffersDataLoadingStatus} from '../../store/data/selector';
 
-const App = (): JSX.Element => {
-  const isOffersDataLoading = useAppSelector((state) => state.isOffersDataLoading);
+// const App = (): JSX.Element => {
+const App = () => {
+  console.info('<App />: Render');
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   if (isOffersDataLoading) {
     return (
