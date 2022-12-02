@@ -31,7 +31,7 @@ const OfferPage = (): JSX.Element => {
   }
 
   const {id, images, isPremium, price, title, type, rating} = offer;
-  const imagesSliced = images.slice(1, 7);
+  const imagesSliced = images.slice(0, 6);
   const ratingPercent = Ratings[Math.round(rating) - 1];
 
   return (

@@ -1,11 +1,13 @@
-import React, {ChangeEvent, FormEvent, useState, memo, useRef} from 'react';
-import {FiveStar} from '../../const';
-import {useAppDispatch} from '../../hooks';
+import React, {ChangeEvent, FormEvent, memo, useEffect, useRef, useState} from 'react';
+import {FiveStar, ReviewStatus} from '../../const';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/reviews/api';
+import {getReviewLoadingStatus} from '../../store/reviews/selector';
 
 const Form = (): JSX.Element => {
   console.info('<Form />: Render');
   const dispatch = useAppDispatch();
+  const reviewStatus = useAppSelector(getReviewLoadingStatus);
   const [formData, setFormData] = useState({rating: '', review: ''});
   const formRef = useRef(null);
 
@@ -14,13 +16,26 @@ const Form = (): JSX.Element => {
     setFormData({...formData, [name]: value});
   };
 
-  const isSendForm: boolean = (formData.review.length >= 50 && formData.rating.length !== 0);
+  const isSendForm: boolean = (
+    formData.review.length >= 50
+    && formData.review.length <= 300
+    && formData.rating.length !== 0
+    && reviewStatus === ReviewStatus.ReviewRest
+  );
 
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(sendReviewOfOfferAction(formData));
     // formRef.reset();
   };
+
+  useEffect(() => {
+    console.log('reviewStatus');
+    console.log(reviewStatus);
+    if (reviewStatus === ReviewStatus.ReviewFulfilled) {
+      setFormData({rating: '', review: ''});
+    }
+  }, [reviewStatus]);
 
   return (
     <form className="reviews__form form" ref={formRef} action="#" method="post" onSubmit={handleSubmitForm}>

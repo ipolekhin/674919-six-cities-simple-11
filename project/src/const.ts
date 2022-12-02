@@ -16,6 +16,12 @@ export enum AuthorizationStatus {
   Unknown = 'UNKNOWN',
 }
 
+export enum ReviewStatus {
+  ReviewRest = 'REVIEW_REST',
+  ReviewPending = 'REVIEW_PENDING',
+  ReviewFulfilled = 'REVIEW_FULFILLED',
+}
+
 export const Ratings: string[] = ['20%', '40%', '60%', '80%', '100%'];
 
 export const FiveStar: number[] = [5, 4, 3, 2, 1];

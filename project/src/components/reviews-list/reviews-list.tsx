@@ -8,7 +8,7 @@ import {getAuthorizationStatus} from '../../store/user-process/selector';
 
 const ReviewsList = (): JSX.Element => {
   console.info('<ReviewsList />: Render');
-  const reviews = useAppSelector(getReviewsOfOffer).slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const reviews = useAppSelector(getReviewsOfOffer).slice(0, 10).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
