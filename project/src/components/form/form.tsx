@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FormEvent, useState, memo} from 'react';
+import React, {ChangeEvent, FormEvent, useState, memo, useRef} from 'react';
 import {FiveStar} from '../../const';
 import {useAppDispatch} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/reviews/api';
@@ -7,6 +7,7 @@ const Form = (): JSX.Element => {
   console.info('<Form />: Render');
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState({rating: '', review: ''});
+  const formRef = useRef(null);
 
   const handleChangeForm = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = evt.target;
@@ -18,10 +19,11 @@ const Form = (): JSX.Element => {
   const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(sendReviewOfOfferAction(formData));
+    // formRef.reset();
   };
 
   return (
-    <form className="reviews__form form" action="#" method="post" onSubmit={handleSubmitForm}>
+    <form className="reviews__form form" ref={formRef} action="#" method="post" onSubmit={handleSubmitForm}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
 
       <div className="reviews__rating-form form__rating">

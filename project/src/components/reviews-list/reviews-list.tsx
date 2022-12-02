@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import ReviewsItem from '../reviews-item/reviews-item';
 import Form from '../form/form';
 import {useAppSelector} from '../../hooks';
@@ -8,7 +8,7 @@ import {getAuthorizationStatus} from '../../store/user-process/selector';
 
 const ReviewsList = (): JSX.Element => {
   console.info('<ReviewsList />: Render');
-  const reviews = useAppSelector(getReviewsOfOffer);
+  const reviews = useAppSelector(getReviewsOfOffer).slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
@@ -32,4 +32,4 @@ const ReviewsList = (): JSX.Element => {
   );
 };
 
-export default ReviewsList;
+export default memo(ReviewsList);
