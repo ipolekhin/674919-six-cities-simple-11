@@ -8,7 +8,6 @@ type PlacesSortingProps = {
 };
 
 const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
-  console.info('<PlacesSorting />: Render');
   const [isSortOpen, setSortOpen] = useState(false);
   const dispatch = useAppDispatch();
 

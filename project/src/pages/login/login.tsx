@@ -8,7 +8,6 @@ import {AppRoute, AuthorizationStatus} from '../../const';
 import {getCurrentCity} from '../../store/data/selector';
 
 const Login = (): JSX.Element => {
-  console.info('<Login />: Render');
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 

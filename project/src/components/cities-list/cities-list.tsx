@@ -5,7 +5,6 @@ import {changeCity} from '../../store/action';
 import {getCurrentCity} from '../../store/data/selector';
 
 const CitiesList = (): JSX.Element => {
-  console.info('<CitiesList />: Render');
   const activeCity = useAppSelector(getCurrentCity);
   const dispatch = useAppDispatch();
 

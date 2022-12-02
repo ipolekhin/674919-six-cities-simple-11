@@ -9,7 +9,6 @@ type PlaceCardProps = {
 };
 
 const PlaceCard = ({offer, onSetActiveOffer, itemClassName}: PlaceCardProps): JSX.Element => {
-  console.info('<PlaceCard />: Render');
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
 
   return (

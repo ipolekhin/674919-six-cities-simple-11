@@ -11,14 +11,10 @@ import {NameSpace} from '../../store/name-space';
 import {getCurrentCity, getOffersCitySorted} from '../../store/data/selector';
 
 const Main = (): JSX.Element => {
-  console.info('<Main />: Render');
   const activeCity = useAppSelector(getCurrentCity);
-  // const offersReducer = useAppSelector(get);
   const currentSortName = useAppSelector((state) => state[NameSpace.Data].sortName);
   const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
-  // let offersOfCity = offersReducer.slice().filter((offer: Offer) => offer.city.name === activeCity);
   const offersOfCity = useAppSelector(getOffersCitySorted);
-  // offersOfCity = sortedOffers(offersOfCity, currentSortName);
 
   const handleChangeActiveOffer = useCallback(
     (offerA: Offer | undefined) => setActiveOffer(offerA),

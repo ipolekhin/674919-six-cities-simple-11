@@ -11,7 +11,6 @@ import {getOffer, getOffersNear} from '../../store/data/selector';
 import {fetchReviewsOfOffersAction} from '../../store/reviews/api';
 
 const OfferPage = (): JSX.Element => {
-  console.info('<OfferPage />: Render');
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
   const offersNear = useAppSelector(getOffersNear);

@@ -13,7 +13,6 @@ import {getOffersDataLoadingStatus} from '../../store/data/selector';
 
 // const App = (): JSX.Element => {
 const App = () => {
-  console.info('<App />: Render');
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   if (isOffersDataLoading) {

@@ -20,7 +20,6 @@ type MapProps = {
 }
 
 const Map = ({offers, city, activeOffer, elementClassName}: MapProps): JSX.Element => {
-  console.info('<Map />: Render');
   const activeCity = useAppSelector(getCurrentCity);
   const mapRef = useRef(null);
   const map = useMap(activeCity, mapRef, city);

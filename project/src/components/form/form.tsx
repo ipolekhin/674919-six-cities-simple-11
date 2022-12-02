@@ -3,13 +3,13 @@ import {FiveStar, ReviewStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/reviews/api';
 import {getReviewLoadingStatus} from '../../store/reviews/selector';
+import {setReviewRestStatus} from "../../store/action";
 
 const Form = (): JSX.Element => {
-  console.info('<Form />: Render');
   const dispatch = useAppDispatch();
   const reviewStatus = useAppSelector(getReviewLoadingStatus);
   const [formData, setFormData] = useState({rating: '', review: ''});
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChangeForm = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = evt.target;
@@ -30,10 +30,14 @@ const Form = (): JSX.Element => {
   };
 
   useEffect(() => {
-    console.log('reviewStatus');
-    console.log(reviewStatus);
     if (reviewStatus === ReviewStatus.ReviewFulfilled) {
       setFormData({rating: '', review: ''});
+
+      if (formRef.current !== null) {
+        formRef.current.reset();
+      }
+
+      dispatch(setReviewRestStatus());
     }
   }, [reviewStatus]);
 

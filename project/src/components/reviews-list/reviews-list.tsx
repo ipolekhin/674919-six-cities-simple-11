@@ -6,19 +6,20 @@ import {AuthorizationStatus} from '../../const';
 import {getReviewsOfOffer} from '../../store/reviews/selector';
 import {getAuthorizationStatus} from '../../store/user-process/selector';
 
+const reviewMaxLength = 10;
+
 const ReviewsList = (): JSX.Element => {
-  console.info('<ReviewsList />: Render');
-  const reviews = useAppSelector(getReviewsOfOffer).slice(0, 10).sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const reviews = useAppSelector(getReviewsOfOffer).slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return (
     <section className="property__reviews reviews">
-      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+      <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{(reviews.length > reviewMaxLength) ? reviewMaxLength : reviews.length}</span></h2>
 
       <ul className="reviews__list">
         {
           reviews &&
-          reviews.map((review) => (
+          reviews.slice(0, reviewMaxLength).map((review) => (
             <ReviewsItem key={review.id} review={review}/>
           ))
         }
