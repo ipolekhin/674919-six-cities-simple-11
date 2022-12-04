@@ -16,14 +16,15 @@ const OfferPage = (): JSX.Element => {
   const offersNear = useAppSelector(getOffersNear);
   const params = useParams();
   const paramsId = Number(params.id);
+
   useEffect(() => {
+    // debugger;
     if (offer === null || offer.id !== paramsId) {
       dispatch(fetchOneOfferAction(paramsId));
       dispatch(fetchOffersNearAction(paramsId));
       dispatch(fetchReviewsOfOffersAction(paramsId));
     }
   }, [offer]);
-  const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
   if (!offer) {
     return <div>Такого офера нет</div>;
@@ -163,7 +164,7 @@ const OfferPage = (): JSX.Element => {
         </div>
         {
           offersNear &&
-          <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+          <Map offers={offersNear} city={City} activeOffer={undefined} elementClassName={PropertyClassName.MapPageOffer}/>
         }
       </section>
 
@@ -171,7 +172,7 @@ const OfferPage = (): JSX.Element => {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-          <PlaceCards offers={offersNear} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListNear} itemClassName={PropertyClassName.PlaceCardItemNear}/>
+          <PlaceCards offers={offersNear} onSetActiveOffer={() => null} listClassName={PropertyClassName.PlaceCardListNear} itemClassName={PropertyClassName.PlaceCardItemNear}/>
         </section>
       </div>
     </main>

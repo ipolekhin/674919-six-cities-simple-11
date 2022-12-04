@@ -1,6 +1,7 @@
 import React, {memo} from 'react';
 import {Link} from 'react-router-dom';
 import {Offer} from '../../types/offers';
+import {Ratings} from '../../const';
 
 type PlaceCardProps = {
   offer: Offer;
@@ -10,6 +11,7 @@ type PlaceCardProps = {
 
 const PlaceCard = ({offer, onSetActiveOffer, itemClassName}: PlaceCardProps): JSX.Element => {
   const {id, previewImage, isPremium, price, title, type, rating} = offer;
+  const ratingPercent = Ratings[Math.round(rating) - 1];
 
   return (
     <article className={`${itemClassName}__card place-card`} onMouseOver={() => {onSetActiveOffer(offer);}} onMouseLeave={() => {onSetActiveOffer(undefined);}}>
@@ -36,7 +38,7 @@ const PlaceCard = ({offer, onSetActiveOffer, itemClassName}: PlaceCardProps): JS
 
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{width: rating * 100 / 5}}></span>
+            <span style={{width: ratingPercent}}></span>
 
             <span className="visually-hidden">Rating</span>
           </div>

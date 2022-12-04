@@ -26,7 +26,6 @@ export const getCurrentSortName = (state: State) => state[NAME_SPACE].sortName;
 export const getOffersCitySorted = createSelector(
   getOffersOfCity,
   getCurrentSortName,
-  // (resultOne, resultTwo) => resultOne
   (resultOne, resultTwo) => sortedOffers(resultOne, resultTwo)
 );
 

@@ -3,7 +3,7 @@ import {FiveStar, ReviewStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/reviews/api';
 import {getReviewLoadingStatus} from '../../store/reviews/selector';
-import {setReviewRestStatus} from '../../store/action';
+import {setReviewRestStatus} from '../../store/reviews/reducer';
 
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();

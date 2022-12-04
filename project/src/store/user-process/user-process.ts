@@ -9,12 +9,14 @@ const initialState: UserProcess = {
   login: '',
 };
 
-export const userProcess = createSlice({
+const userProcess = createSlice({
   name: NameSpace.User,
   initialState,
   reducers: {},
   extraReducers(builder) {
     builder
+      .addCase(checkAuthAction.pending, (state, action) => {
+      })
       .addCase(checkAuthAction.fulfilled, (state, action) => {
         state.authorizationStatus = AuthorizationStatus.Auth;
         state.login = action.payload;
@@ -35,3 +37,5 @@ export const userProcess = createSlice({
       });
   },
 });
+
+export default userProcess.reducer;

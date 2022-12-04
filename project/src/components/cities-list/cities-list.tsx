@@ -1,8 +1,9 @@
 import React, {MouseEvent, memo} from 'react';
 import {Cities} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeCity} from '../../store/action';
+// import {changeCity} from '../../store/action';
 import {getCurrentCity} from '../../store/data/selector';
+import {changeCity} from '../../store/data/reducer';
 
 const CitiesList = (): JSX.Element => {
   const activeCity = useAppSelector(getCurrentCity);

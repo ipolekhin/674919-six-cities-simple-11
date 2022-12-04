@@ -3,17 +3,20 @@ import {Reviews} from '../../types/reviews';
 import {NameSpace} from '../name-space';
 import {fetchReviewsOfOffersAction, sendReviewOfOfferAction} from './api';
 import {ReviewStatus} from '../../const';
-import {setReviewRestStatus} from '../action';
 
 const initialState = {
   isReviewsLoading: ReviewStatus.ReviewRest,
   reviewsOfOffer: [] as Reviews,
 };
 
-export const reviewsReducer = createSlice({
+const reviewsReducer = createSlice({
   name: NameSpace.Reviews,
   initialState,
-  reducers: {},
+  reducers: {
+    setReviewRestStatus: (state) => {
+      state.isReviewsLoading = ReviewStatus.ReviewRest;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsOfOffersAction.fulfilled, (state, action) => {
@@ -25,9 +28,9 @@ export const reviewsReducer = createSlice({
       .addCase(sendReviewOfOfferAction.fulfilled, (state, action) => {
         state.reviewsOfOffer = action.payload;
         state.isReviewsLoading = ReviewStatus.ReviewFulfilled;
-      })
-      .addCase(setReviewRestStatus, (state, action) => {
-        state.isReviewsLoading = ReviewStatus.ReviewRest;
       });
   },
 });
+
+export const {setReviewRestStatus} = reviewsReducer.actions;
+export default reviewsReducer.reducer;
