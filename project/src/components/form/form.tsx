@@ -61,7 +61,7 @@ const Form = (): JSX.Element => {
         }
       </div>
 
-      <textarea className="reviews__textarea form__textarea" id="review" onChange={handleChangeForm} name="review" value={formData.review} placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" onChange={handleChangeForm} name="review" value={formData.review} placeholder="Tell how was your stay, what you like and what can be improved" disabled={reviewStatus !== ReviewStatus.ReviewRest}></textarea>
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

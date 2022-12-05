@@ -1,5 +1,4 @@
 import {createAction} from '@reduxjs/toolkit';
+import {AppRoute} from '../const';
 
-// export const setOffersDataLoadingStatus = createAction<boolean>('data/setOffersDataLoadingStatus');
-
-// export const setError = createAction<string | null>('data/setError');
+export const redirectToRoute = createAction<AppRoute | string>('page/redirectToRoute');

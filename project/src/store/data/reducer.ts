@@ -1,8 +1,9 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../name-space';
-import {Cities, SortList} from '../../const';
-import {fetchOneOfferAction, fetchOffersAction, fetchOffersNearAction} from './api';
+import {AppRoute, Cities, SortList} from '../../const';
+import {fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction} from './api';
 import {Data} from '../../types/state';
+import {redirectToRoute} from '../action';
 
 const initialState: Data = {
   city: Cities[0],
@@ -51,6 +52,7 @@ const dataReducer = createSlice({
       })
       .addCase(fetchOneOfferAction.rejected, (state) => {
         state.isOffersDataLoading = false;
+        redirectToRoute(AppRoute.PageNotExist);
       })
       .addCase(fetchOneOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
@@ -59,9 +61,9 @@ const dataReducer = createSlice({
       .addCase(fetchOffersNearAction.fulfilled, (state, action) => {
         state.offersNear = action.payload;
       });
-      // .addCase(clearErrorAction, (state, action) => {
-      //   state.error = action.payload;
-      // });
+    // .addCase(clearErrorAction, (state, action) => {
+    //   state.error = action.payload;
+    // });
   },
 });
 
