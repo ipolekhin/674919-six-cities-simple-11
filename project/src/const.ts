@@ -25,6 +25,7 @@ export enum ReviewStatus {
 export const Ratings: string[] = ['20%', '40%', '60%', '80%', '100%'];
 
 export const FiveStar: number[] = [5, 4, 3, 2, 1];
+
 export const Months: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
 export enum Markers {
@@ -48,31 +49,13 @@ export enum PropertyClassName {
   PlaceCardItemCities = 'cities',
 }
 
-export enum CitiesType {
-  PARIS = 'Paris',
-  COLOGNE = 'Cologne',
-  BRUSSELS = 'Brussels',
-  AMSTERDAM = 'Amsterdam',
-  HAMBURG = 'Hamburg',
-  DUSSELDORF = 'Dusseldorf',
-}
-
-// export const CitiesCoordinates: {[key: string]: string} = {
-//   [CitiesType.PARIS]: [48.853, 2.348],
-//   [CitiesType.COLOGNE]: [48.853, 2.348],
-//   [CitiesType.BRUSSELS]: [48.853, 2.348],
-//   [CitiesType.AMSTERDAM]: [48.853, 2.348],
-//   [CitiesType.HAMBURG]: [48.853, 2.348],
-//   [CitiesType.DUSSELDORF]: [48.853, 2.348],
-// } as const;
-
 export const Cities: string[] = ['Paris', 'Cologne', 'Brussels', 'Amsterdam', 'Hamburg', 'Dusseldorf'];
 
 export const SortList = {
-  POPULAR: 'Popular',
-  PRICE_LOW: 'Price: low to high',
-  PRICE_HIGH: 'Price: high to low',
-  TOP_RATED_FIRST: 'Top rated first',
+  Popular: 'Popular',
+  PriceLow: 'Price: low to high',
+  PriceHigh: 'Price: high to low',
+  TopRatedFirst: 'Top rated first',
 } as const;
 
 export enum APIRoute {

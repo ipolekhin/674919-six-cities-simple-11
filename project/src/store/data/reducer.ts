@@ -10,7 +10,7 @@ const initialState: Data = {
   offer: null,
   offers: [],
   offersNear: [],
-  sortName: SortList.POPULAR,
+  sortName: SortList.Popular,
   isOffersDataLoading: false,
   error: null,
 };

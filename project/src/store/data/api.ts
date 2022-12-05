@@ -4,7 +4,6 @@ import {AppDispatch, State} from '../../types/state';
 import {Offer, Offers} from '../../types/offers';
 import {APIRoute} from '../../const';
 import {TIMEOUT_SHOW_ERROR} from '../../const';
-// import {store} from '../index';
 import {setError} from './reducer';
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {

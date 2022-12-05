@@ -10,7 +10,6 @@ import {getCurrentCity} from '../../store/data/selector';
 const Login = (): JSX.Element => {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentCity = useAppSelector(getCurrentCity);

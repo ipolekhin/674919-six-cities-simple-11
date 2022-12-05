@@ -1,12 +1,12 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Reviews} from '../../types/reviews';
 import {NameSpace} from '../name-space';
 import {fetchReviewsOfOffersAction, sendReviewOfOfferAction} from './api';
 import {ReviewStatus} from '../../const';
+import {ReviewsProcess} from '../../types/state';
 
-const initialState = {
+const initialState: ReviewsProcess = {
   isReviewsLoading: ReviewStatus.ReviewRest,
-  reviewsOfOffer: [] as Reviews,
+  reviewsOfOffer: [],
 };
 
 const reviewsReducer = createSlice({

@@ -11,11 +11,11 @@ const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
   const [isSortOpen, setSortOpen] = useState(false);
   const dispatch = useAppDispatch();
 
-  const handleSortOpenState = () => {
+  const handleOpenStateSort = () => {
     setSortOpen(!isSortOpen);
   };
 
-  const handleClickSort = (evt:MouseEvent<HTMLElement>) => {
+  const handleSortClick = (evt:MouseEvent<HTMLElement>) => {
     const {textContent} = (evt.target as HTMLElement);
 
     if (textContent) {
@@ -24,7 +24,7 @@ const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
   };
 
   return (
-    <form className="places__sorting" action="#" method="get" onClick={handleSortOpenState}>
+    <form className="places__sorting" action="#" method="get" onClick={handleOpenStateSort}>
       <span className="places__sorting-caption">Sort by</span>
 
       <span className="places__sorting-type" tabIndex={0}>&nbsp;{currentSortName}
@@ -36,7 +36,7 @@ const PlacesSorting = ({currentSortName}: PlacesSortingProps): JSX.Element => {
       <ul className={`places__options places__options--custom ${isSortOpen ? 'places__options--opened' : ''}`}>
         {
           Object.values(SortList).map((sortName) => (
-            <li className={`places__option ${(currentSortName === sortName) ? 'places__option--active' : ''}`} onClick={handleClickSort} key={sortName} tabIndex={0}>{sortName}</li>
+            <li className={`places__option ${(currentSortName === sortName) ? 'places__option--active' : ''}`} onClick={handleSortClick} key={sortName} tabIndex={0}>{sortName}</li>
           ))
         }
       </ul>

@@ -23,10 +23,9 @@ const Form = (): JSX.Element => {
     && reviewStatus === ReviewStatus.ReviewRest
   );
 
-  const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(sendReviewOfOfferAction(formData));
-    // formRef.reset();
   };
 
   useEffect(() => {
@@ -42,7 +41,7 @@ const Form = (): JSX.Element => {
   }, [reviewStatus]);
 
   return (
-    <form className="reviews__form form" ref={formRef} action="#" method="post" onSubmit={handleSubmitForm}>
+    <form className="reviews__form form" ref={formRef} action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
 
       <div className="reviews__rating-form form__rating">
@@ -75,5 +74,4 @@ const Form = (): JSX.Element => {
   );
 };
 
-// export default Form;
 export default memo(Form);

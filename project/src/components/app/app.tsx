@@ -11,7 +11,6 @@ import browserHistory from '../../browser-history';
 import {useAppSelector} from '../../hooks';
 import {getOffersDataLoadingStatus} from '../../store/data/selector';
 
-// const App = (): JSX.Element => {
 const App = () => {
   const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
