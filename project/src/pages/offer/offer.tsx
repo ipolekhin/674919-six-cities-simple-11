@@ -1,9 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import ReviewsList from '../../components/reviews-list/reviews-list';
 import Map from '../../components/map/map';
 import PlaceCards from '../../components/place-cards/place-cards';
 import {useParams} from 'react-router-dom';
-import {Offer} from '../../types/offers';
+import {Offers} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchOffersNearAction, fetchOneOfferAction} from '../../store/data/api';
@@ -11,26 +11,27 @@ import {getOffer, getOffersNear} from '../../store/data/selector';
 import {fetchReviewsOfOffersAction} from '../../store/reviews/api';
 
 const OfferPage = (): JSX.Element => {
-  console.info('<OfferPage />: Render');
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
   const offersNear = useAppSelector(getOffersNear);
   const params = useParams();
   const paramsId = Number(params.id);
+
   useEffect(() => {
+    // debugger;
     if (offer === null || offer.id !== paramsId) {
       dispatch(fetchOneOfferAction(paramsId));
       dispatch(fetchOffersNearAction(paramsId));
       dispatch(fetchReviewsOfOffersAction(paramsId));
     }
   }, [offer]);
-  const [activeOffer, setActiveOffer] = useState<Offer | undefined>(undefined);
 
   if (!offer) {
     return <div>Такого офера нет</div>;
   }
 
-  const {id, images, isPremium, price, title, type, rating} = offer;
+  const offersNearChange: Offers = offersNear.concat([offer]);
+  const {id, bedrooms, description, goods, host, images, isPremium, maxAdults, price, title, type, rating} = offer;
   const imagesSliced = images.slice(0, 6);
   const ratingPercent = Ratings[Math.round(rating) - 1];
 
@@ -80,52 +81,31 @@ const OfferPage = (): JSX.Element => {
               </li>
 
               <li className="property__feature property__feature--bedrooms">
-                3 Bedrooms
+                {bedrooms} Bedrooms
               </li>
 
               <li className="property__feature property__feature--adults">
-                Max 4 adults
+                Max {maxAdults} adults
               </li>
             </ul>
 
             <div className="property__price">
               <b className="property__price-value">&euro;{price}</b>
+
               <span className="property__price-text">&nbsp;night</span>
             </div>
 
             <div className="property__inside">
               <h2 className="property__inside-title">What&apos;s inside</h2>
+
               <ul className="property__inside-list">
-                <li className="property__inside-item">
-                  Wi-Fi
-                </li>
-                <li className="property__inside-item">
-                  Washing machine
-                </li>
-                <li className="property__inside-item">
-                  Towels
-                </li>
-                <li className="property__inside-item">
-                  Heating
-                </li>
-                <li className="property__inside-item">
-                  Coffee machine
-                </li>
-                <li className="property__inside-item">
-                  Baby seat
-                </li>
-                <li className="property__inside-item">
-                  Kitchen
-                </li>
-                <li className="property__inside-item">
-                  Dishwasher
-                </li>
-                <li className="property__inside-item">
-                  Cabel TV
-                </li>
-                <li className="property__inside-item">
-                  Fridge
-                </li>
+                {
+                  goods.map((good) => (
+                    <li className="property__inside-item" key={good}>
+                      {good}
+                    </li>
+                  ))
+                }
               </ul>
             </div>
 
@@ -133,28 +113,23 @@ const OfferPage = (): JSX.Element => {
               <h2 className="property__host-title">Meet the host</h2>
 
               <div className="property__host-user user">
-                <div className="property__avatar-wrapper property__avatar-wrapper--pro user__avatar-wrapper">
-                  <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar"/>
+                <div className={`property__avatar-wrapper user__avatar-wrapper ${host.isPro ? 'property__avatar-wrapper--pro' : ''}`}>
+                  <img className="property__avatar user__avatar" src={host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                 </div>
 
                 <span className="property__user-name">
-                  Angelina
+                  {host.name}
                 </span>
 
-                <span className="property__user-status">
-                  Pro
-                </span>
+                { host.isPro &&
+                  <span className="property__user-status">
+                    Pro
+                  </span>}
               </div>
 
               <div className="property__description">
                 <p className="property__text">
-                  A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                  building is green and from 18th century.
-                </p>
-
-                <p className="property__text">
-                  An independent House, strategically located between Rembrand Square and National Opera, but where the
-                  bustle of the city comes to rest in this alley flowery and colorful.
+                  {description}
                 </p>
               </div>
             </div>
@@ -164,7 +139,7 @@ const OfferPage = (): JSX.Element => {
         </div>
         {
           offersNear &&
-          <Map offers={offersNear} city={City} activeOffer={activeOffer} elementClassName={PropertyClassName.MapPageOffer}/>
+          <Map offers={offersNearChange} city={City} activeOffer={offer} elementClassName={PropertyClassName.MapPageOffer}/>
         }
       </section>
 
@@ -172,7 +147,7 @@ const OfferPage = (): JSX.Element => {
         <section className="near-places places">
           <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-          <PlaceCards offers={offersNear} onSetActiveOffer={setActiveOffer} listClassName={PropertyClassName.PlaceCardListNear} itemClassName={PropertyClassName.PlaceCardItemNear}/>
+          <PlaceCards offers={offersNear} onSetActiveOffer={() => null} listClassName={PropertyClassName.PlaceCardListNear} itemClassName={PropertyClassName.PlaceCardItemNear}/>
         </section>
       </div>
     </main>

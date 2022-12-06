@@ -1,5 +1,6 @@
 import {store} from '../store';
-import {setError} from '../store/action';
+// import {clearErrorAction, setError} from '../store/data/reducer';
+import {setError} from '../store/data/reducer';
 import {clearErrorAction} from '../store/api';
 
 const ProcessErrorHandle = (message: string): void => {

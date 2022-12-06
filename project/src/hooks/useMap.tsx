@@ -1,6 +1,5 @@
 import {useEffect, useState, useRef, MutableRefObject} from 'react';
 import {Map, TileLayer} from 'leaflet';
-// import {CitiesCoordinates} from "../const";
 
 type UseMapProps = {
   activeCity: string;
@@ -16,13 +15,6 @@ type UseMapProps = {
 const useMap = (activeCity: UseMapProps['activeCity'], mapRef: UseMapProps['mapRef'], city:UseMapProps['city']) => {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
-  // const cityCrd = CitiesCoordinates[activeCity];
-  // console.log('cityCrd');
-  // console.log(cityCrd);
-  // console.log(city.Lat);
-  // console.log(city.Lng);
-  // console.log(cityCrd[0]);
-  // console.log(cityCrd[1]);
 
   useEffect(() => {
     if (mapRef.current !== null && !isRenderedRef.current) {
@@ -30,8 +22,6 @@ const useMap = (activeCity: UseMapProps['activeCity'], mapRef: UseMapProps['mapR
         center: {
           lat: city.Lat,
           lng: city.Lng,
-          // lat: cityCrd[0],
-          // lng: cityCrd[1],
         },
         zoom: city.Zoom,
       });

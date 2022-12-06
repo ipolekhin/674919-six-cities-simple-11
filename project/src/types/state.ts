@@ -1,6 +1,7 @@
 import {store} from '../store';
 import {AuthorizationStatus} from '../const';
 import {Offer, Offers} from './offers';
+import {Reviews} from './reviews';
 
 export type UserProcess = {
   authorizationStatus: AuthorizationStatus;
@@ -15,6 +16,11 @@ export type Data = {
   sortName: string;
   isOffersDataLoading: boolean;
   error: string | null;
+};
+
+export type ReviewsProcess = {
+  isReviewsLoading: string;
+  reviewsOfOffer: Reviews;
 };
 
 export type State = ReturnType<typeof store.getState>;

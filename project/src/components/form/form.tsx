@@ -3,13 +3,13 @@ import {FiveStar, ReviewStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/reviews/api';
 import {getReviewLoadingStatus} from '../../store/reviews/selector';
+import {setReviewRestStatus} from '../../store/reviews/reducer';
 
 const Form = (): JSX.Element => {
-  console.info('<Form />: Render');
   const dispatch = useAppDispatch();
   const reviewStatus = useAppSelector(getReviewLoadingStatus);
   const [formData, setFormData] = useState({rating: '', review: ''});
-  const formRef = useRef(null);
+  const formRef = useRef<HTMLFormElement>(null);
 
   const handleChangeForm = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = evt.target;
@@ -23,22 +23,25 @@ const Form = (): JSX.Element => {
     && reviewStatus === ReviewStatus.ReviewRest
   );
 
-  const handleSubmitForm = (evt: FormEvent<HTMLFormElement>) => {
+  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
     dispatch(sendReviewOfOfferAction(formData));
-    // formRef.reset();
   };
 
   useEffect(() => {
-    console.log('reviewStatus');
-    console.log(reviewStatus);
     if (reviewStatus === ReviewStatus.ReviewFulfilled) {
       setFormData({rating: '', review: ''});
+
+      if (formRef.current !== null) {
+        formRef.current.reset();
+      }
+
+      dispatch(setReviewRestStatus());
     }
   }, [reviewStatus]);
 
   return (
-    <form className="reviews__form form" ref={formRef} action="#" method="post" onSubmit={handleSubmitForm}>
+    <form className="reviews__form form" ref={formRef} action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
 
       <div className="reviews__rating-form form__rating">
@@ -57,7 +60,7 @@ const Form = (): JSX.Element => {
         }
       </div>
 
-      <textarea className="reviews__textarea form__textarea" id="review" onChange={handleChangeForm} name="review" value={formData.review} placeholder="Tell how was your stay, what you like and what can be improved"></textarea>
+      <textarea className="reviews__textarea form__textarea" id="review" onChange={handleChangeForm} name="review" value={formData.review} placeholder="Tell how was your stay, what you like and what can be improved" disabled={reviewStatus !== ReviewStatus.ReviewRest}></textarea>
 
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
@@ -71,5 +74,4 @@ const Form = (): JSX.Element => {
   );
 };
 
-// export default Form;
 export default memo(Form);

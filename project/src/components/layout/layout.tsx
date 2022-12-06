@@ -12,7 +12,7 @@ const Layout = (): JSX.Element => {
   const params = useLocation();
   const pageClassName = PageModifierClassType[params.pathname];
 
-  const HandleLogout = (evt: MouseEvent<HTMLAnchorElement>) => {
+  const handleLogoutClick = (evt: MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
     dispatch(logoutAction());
   };
@@ -54,7 +54,7 @@ const Layout = (): JSX.Element => {
                         </Link>
                         :
 
-                        <a className="header__nav-link" href="#" onClick={HandleLogout}>
+                        <a className="header__nav-link" href="#" onClick={handleLogoutClick}>
                           <span className="header__signout">Sign out</span>
                         </a>
                     }

@@ -1,31 +1,36 @@
 import {createSlice} from '@reduxjs/toolkit';
-import {Reviews} from '../../types/reviews';
 import {NameSpace} from '../name-space';
 import {fetchReviewsOfOffersAction, sendReviewOfOfferAction} from './api';
 import {ReviewStatus} from '../../const';
+import {ReviewsProcess} from '../../types/state';
 
-const initialState = {
+const initialState: ReviewsProcess = {
   isReviewsLoading: ReviewStatus.ReviewRest,
-  reviewsOfOffer: [] as Reviews,
+  reviewsOfOffer: [],
 };
 
-export const reviewsReducer = createSlice({
+const reviewsReducer = createSlice({
   name: NameSpace.Reviews,
   initialState,
-  reducers: {},
+  reducers: {
+    setReviewRestStatus: (state) => {
+      state.isReviewsLoading = ReviewStatus.ReviewRest;
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(fetchReviewsOfOffersAction.fulfilled, (state, action) => {
         state.reviewsOfOffer = action.payload;
-      });
-    builder
+      })
       .addCase(sendReviewOfOfferAction.pending, (state, action) => {
         state.isReviewsLoading = ReviewStatus.ReviewPending;
-      });
-    builder
+      })
       .addCase(sendReviewOfOfferAction.fulfilled, (state, action) => {
         state.reviewsOfOffer = action.payload;
         state.isReviewsLoading = ReviewStatus.ReviewFulfilled;
       });
   },
 });
+
+export const {setReviewRestStatus} = reviewsReducer.actions;
+export default reviewsReducer.reducer;
