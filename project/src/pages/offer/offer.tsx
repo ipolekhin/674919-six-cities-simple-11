@@ -8,7 +8,7 @@ import {Ratings, PropertyClassName, City} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchOffersNearAction, fetchOneOfferAction} from '../../store/data/api';
 import {getOffer, getOffersNear} from '../../store/data/selector';
-import {fetchReviewsOfOffersAction} from '../../store/reviews/api';
+import {fetchReviewsOfOffersAction} from '../../store/reviews-process/api';
 
 const OfferPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
