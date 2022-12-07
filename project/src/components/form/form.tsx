@@ -1,9 +1,9 @@
 import React, {ChangeEvent, FormEvent, memo, useEffect, useRef, useState} from 'react';
 import {FiveStar, ReviewStatus} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {sendReviewOfOfferAction} from '../../store/reviews/api';
-import {getReviewLoadingStatus} from '../../store/reviews/selector';
-import {setReviewRestStatus} from '../../store/reviews/reducer';
+import {sendReviewOfOfferAction} from '../../store/reviews-process/api';
+import {getReviewLoadingStatus} from '../../store/reviews-process/selector';
+import {setReviewRestStatus} from '../../store/reviews-process/reviews-process';
 
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
