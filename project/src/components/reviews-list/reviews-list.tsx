@@ -3,7 +3,7 @@ import ReviewsItem from '../reviews-item/reviews-item';
 import Form from '../form/form';
 import {useAppSelector} from '../../hooks';
 import {AuthorizationStatus} from '../../const';
-import {getReviewsOfOffer} from '../../store/reviews/selector';
+import {getReviewsOfOffer} from '../../store/reviews-process/selector';
 import {getAuthorizationStatus} from '../../store/user-process/selector';
 
 const reviewMaxLength = 10;
