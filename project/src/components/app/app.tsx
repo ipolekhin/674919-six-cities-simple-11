@@ -11,7 +11,8 @@ import browserHistory from '../../browser-history';
 // import {useAppSelector} from '../../hooks';
 // import {getOffersDataLoadingStatus} from '../../store/data/selector';
 
-const App = () => {
+const App = () => (
+// {
   // const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
 
   // if (isOffersDataLoading) {
@@ -20,24 +21,24 @@ const App = () => {
   //   );
   // }
 
-  return (
-    <HistoryRouter history={browserHistory}>
-      <Routes>
-        <Route path={AppRoute.Main} element={<Layout/>}>
-          <Route index element={<Main/>}/>
+  // return (
+  <HistoryRouter history={browserHistory}>
+    <Routes>
+      <Route path={AppRoute.Main} element={<Layout/>}>
+        <Route index element={<Main/>}/>
 
-          <Route path={AppRoute.Login} element={<Login/>}/>
+        <Route path={AppRoute.Login} element={<Login/>}/>
 
-          <Route path={AppRoute.Offer} element={<OfferPage/>}/>
-        </Route>
+        <Route path={AppRoute.Offer} element={<OfferPage/>}/>
+      </Route>
 
-        <Route
-          path='*'
-          element={<PageNotExist/>}
-        />
-      </Routes>
-    </HistoryRouter>
-  );
-};
+      <Route
+        path='*'
+        element={<PageNotExist/>}
+      />
+    </Routes>
+  </HistoryRouter>
+);
+// };
 
 export default App;
