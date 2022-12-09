@@ -7,24 +7,35 @@ import PageNotExist from '../../pages/page-not-exist/page-not-exist';
 import Layout from '../layout/layout';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
+import {useEffect} from 'react';
+import {fetchOffersAction} from '../../store/data/api';
+import {useAppDispatch} from '../../hooks';
 
-const App = () => (
-  <HistoryRouter history={browserHistory}>
-    <Routes>
-      <Route path={AppRoute.Main} element={<Layout/>}>
-        <Route index element={<Main/>}/>
+const App = () => {
+  const dispatch = useAppDispatch();
 
-        <Route path={AppRoute.Login} element={<Login/>}/>
+  useEffect(() => {
+    dispatch(fetchOffersAction());
+  }, []);
 
-        <Route path={AppRoute.Offer} element={<OfferPage/>}/>
-      </Route>
+  return (
+    <HistoryRouter history={browserHistory}>
+      <Routes>
+        <Route path={AppRoute.Main} element={<Layout/>}>
+          <Route index element={<Main/>}/>
 
-      <Route
-        path='*'
-        element={<PageNotExist/>}
-      />
-    </Routes>
-  </HistoryRouter>
-);
+          <Route path={AppRoute.Login} element={<Login/>}/>
+
+          <Route path={AppRoute.Offer} element={<OfferPage/>}/>
+        </Route>
+
+        <Route
+          path='*'
+          element={<PageNotExist/>}
+        />
+      </Routes>
+    </HistoryRouter>
+  );
+};
 
 export default App;
