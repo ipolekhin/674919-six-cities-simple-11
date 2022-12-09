@@ -7,12 +7,13 @@ import {Offers} from '../../types/offers';
 import {Ratings, PropertyClassName, City} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchOffersNearAction, fetchOneOfferAction} from '../../store/data/api';
-import {getOffer, getOffersNear} from '../../store/data/selector';
+import {getOffer, getOfferDataLoadingStatus, getOffersNear} from '../../store/data/selector';
 import {fetchReviewsOfOffersAction} from '../../store/reviews-process/api';
 
 const OfferPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const offer = useAppSelector(getOffer);
+  const isOffersDataLoading = useAppSelector(getOfferDataLoadingStatus);
   const offersNear = useAppSelector(getOffersNear);
   const params = useParams();
   const paramsId = Number(params.id);
@@ -24,7 +25,12 @@ const OfferPage = (): JSX.Element => {
       dispatch(fetchOffersNearAction(paramsId));
       dispatch(fetchReviewsOfOffersAction(paramsId));
     }
-  }, [offer]);
+  }, [offer, paramsId]);
+
+
+  if (isOffersDataLoading) {
+    return <div>Загрузка данных...</div>;
+  }
 
   if (!offer) {
     return <div>Такого офера нет</div>;

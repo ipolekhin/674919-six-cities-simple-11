@@ -14,6 +14,7 @@ export type Review = {
 export type Reviews = Review[];
 
 export type ReviewForm = {
+  id: string;
   review: string;
   rating: string;
 };

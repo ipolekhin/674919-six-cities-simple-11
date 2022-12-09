@@ -1,12 +1,15 @@
-import React, {MouseEvent} from 'react';
+import React, {MouseEvent, memo} from 'react';
 import {Link, Outlet, useLocation} from 'react-router-dom';
 import {AppRoute, AuthorizationStatus, PageModifierClassType} from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {getAuthorizationStatus, getLogin} from '../../store/user-process/selector';
 import {logoutAction} from '../../store/user-process/api';
+import LoadingScreen from '../loading-screen/loading-screen.';
+import {getOffersDataLoadingStatus} from '../../store/data/selector';
 
 const Layout = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const login = useAppSelector(getLogin);
   const params = useLocation();
@@ -65,9 +68,14 @@ const Layout = (): JSX.Element => {
         </div>
       </header>
 
+      {/*{isOffersDataLoading ?*/}
+      {/*  <LoadingScreen/>*/}
+      {/*  : <Outlet/>}*/}
+      {isOffersDataLoading &&
+        <LoadingScreen/>}
       <Outlet/>
     </div>
   );
 };
 
-export default Layout;
+export default memo(Layout);

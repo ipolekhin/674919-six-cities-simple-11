@@ -13,6 +13,8 @@ export const getOffers = (state: State) => state[NAME_SPACE].offers;
 
 export const getOffer = (state: State) => state[NAME_SPACE].offer;
 
+export const getOfferDataLoadingStatus = (state: State) => state[NAME_SPACE].isOfferDataLoading;
+
 export const getOffersNear = (state: State) => state[NAME_SPACE].offersNear;
 
 export const getOffersOfCity = createSelector(
