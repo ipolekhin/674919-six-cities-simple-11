@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../name-space';
 import {AppRoute, Cities, SortList} from '../../const';
-import {fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction} from './api';
+import {fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction, clearErrorAction} from './api';
 import {Data} from '../../types/state';
 import {redirectToRoute} from '../action';
 
@@ -29,9 +29,10 @@ const dataReducer = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
-    clearErrorAction: (state) => {
-      state.error = null;
-    },
+    //todo
+    // clearErrorAction: (state) => {
+    //   state.error = null;
+    // },
     setOffersDataLoadingStatus: (state, action:PayloadAction<boolean>) => {
       state.isOffersDataLoading = false;
     },
@@ -61,12 +62,12 @@ const dataReducer = createSlice({
       })
       .addCase(fetchOffersNearAction.fulfilled, (state, action) => {
         state.offersNear = action.payload;
+      })
+      .addCase(clearErrorAction.fulfilled, (state, action) => {
+        state.error = action.payload;
       });
-    // .addCase(clearErrorAction, (state, action) => {
-    //   state.error = action.payload;
-    // });
   },
 });
 
-export const {changeCity, clearErrorAction, setError, setOffersDataLoadingStatus, setSortName} = dataReducer.actions;
+export const {changeCity, setError, setOffersDataLoadingStatus, setSortName} = dataReducer.actions;
 export default dataReducer.reducer;

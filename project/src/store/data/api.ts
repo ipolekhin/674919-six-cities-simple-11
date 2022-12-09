@@ -43,13 +43,18 @@ export const fetchOffersNearAction = createAsyncThunk<Offers, number, {
 
 export const clearErrorAction = createAsyncThunk(
   'data/clearError',
-  (_arq, {dispatch}) => {
+  async (_arq, {dispatch}) => {
     // store.dispatch(setOffersDataLoadingStatus(false));
-    setTimeout(
-      () => dispatch(setError(null)
-      ), TIMEOUT_SHOW_ERROR);
+    // setTimeout(
+    //   () => dispatch(setError(null)
+    //   ), TIMEOUT_SHOW_ERROR);
 
-    // const timeout = () => new Promise(() => setTimeout(() => null, TIMEOUT_SHOW_ERROR));
-    // return await timeout();
+    const timeout = new Promise((resolve): null => {
+      setTimeout(() => {
+        resolve(null);
+      }, TIMEOUT_SHOW_ERROR);
+    });
+    const data: null = await timeout;
+    return data;
   },
 );
