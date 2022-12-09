@@ -5,23 +5,10 @@ import Login from '../../pages/login/login';
 import OfferPage from '../../pages/offer-page/offer-page';
 import PageNotExist from '../../pages/page-not-exist/page-not-exist';
 import Layout from '../layout/layout';
-// import LoadingScreen from '../loading-screen/loading-screen.';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
-// import {useAppSelector} from '../../hooks';
-// import {getOffersDataLoadingStatus} from '../../store/data/selector';
 
 const App = () => (
-// {
-  // const isOffersDataLoading = useAppSelector(getOffersDataLoadingStatus);
-
-  // if (isOffersDataLoading) {
-  //   return (
-  //     <LoadingScreen/>
-  //   );
-  // }
-
-  // return (
   <HistoryRouter history={browserHistory}>
     <Routes>
       <Route path={AppRoute.Main} element={<Layout/>}>
@@ -39,6 +26,5 @@ const App = () => (
     </Routes>
   </HistoryRouter>
 );
-// };
 
 export default App;
