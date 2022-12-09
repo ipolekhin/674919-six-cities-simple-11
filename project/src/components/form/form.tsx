@@ -4,12 +4,15 @@ import {useAppDispatch, useAppSelector} from '../../hooks';
 import {sendReviewOfOfferAction} from '../../store/reviews-process/api';
 import {getReviewLoadingStatus} from '../../store/reviews-process/selector';
 import {setReviewRestStatus} from '../../store/reviews-process/reviews-process';
+import {useParams} from 'react-router-dom';
 
 const Form = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const reviewStatus = useAppSelector(getReviewLoadingStatus);
-  const [formData, setFormData] = useState({rating: '', review: ''});
+  const [formData, setFormData] = useState({id: '', rating: '', review: ''});
   const formRef = useRef<HTMLFormElement>(null);
+  const params = useParams();
+  const paramsId = Number(params.id);
 
   const handleChangeForm = (evt: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
     const {name, value} = evt.target;
@@ -29,8 +32,12 @@ const Form = (): JSX.Element => {
   };
 
   useEffect(() => {
+    if (!formData.id) {
+      setFormData({...formData, id: String(paramsId)});
+    }
+
     if (reviewStatus === ReviewStatus.ReviewFulfilled) {
-      setFormData({rating: '', review: ''});
+      setFormData({...formData, rating: '', review: ''});
 
       if (formRef.current !== null) {
         formRef.current.reset();

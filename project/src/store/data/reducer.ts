@@ -12,6 +12,7 @@ const initialState: Data = {
   offersNear: [],
   sortName: SortList.Popular,
   isOffersDataLoading: false,
+  isOfferDataLoading: false,
   error: null,
 };
 

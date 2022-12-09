@@ -15,6 +15,7 @@ export type Data = {
   offersNear: Offers;
   sortName: string;
   isOffersDataLoading: boolean;
+  isOfferDataLoading: boolean;
   error: string | null;
 };
 
