@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../name-space';
 import {AppRoute, Cities, SortList} from '../../const';
-import {clearErrorAction, fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction} from './api';
+import {clearErrorAction, fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction, giveMeSomeTime} from './api';
 import {Data} from '../../types/state';
 import {redirectToRoute} from '../action';
 
@@ -74,8 +74,12 @@ const dataReducer = createSlice({
     //   state.count = state.count + 1;
     // });
       .addCase(clearErrorAction.fulfilled, (state, action) => {
-        console.log('clearErrorAction');
-        state.error = action.payload;
+        console.log('clearErrorAction reducer');
+        // state.error = null;
+      })
+      .addCase(giveMeSomeTime.fulfilled, (state, action) => {
+        console.log('giveMeSomeTime reducer');
+        // state.error = null;
       });
   },
 });

@@ -46,7 +46,7 @@ export const countPlus = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
 }>(
-  'user/countNew',
+  'data/countNew',
   (_arg, {dispatch}) => {
     console.log('countPlus API');
     dispatch(countPlus());
@@ -55,26 +55,38 @@ export const countPlus = createAsyncThunk<void, undefined, {
 
 export const clearErrorAction = createAsyncThunk<null>(
   'data/clearError',
-  async () => {
-    // store.dispatch(setOffersDataLoadingStatus(false));
-    // setTimeout(
-    //   () => dispatch(setError(null)
-    //   ), TIMEOUT_SHOW_ERROR);
+  async () =>
+  // store.dispatch(setOffersDataLoadingStatus(false));
+  // setTimeout(
+  //   () => dispatch(setError(null)
+  //   ), TIMEOUT_SHOW_ERROR);
 
-    // await new Promise((resolve) => {
-    //   const timerId = setTimeout(() => {
-    //     resolve(null);
-    //     clearTimeout(timerId);
-    //   }, 12000);
-    // });
-
-    const timeout = await new Promise((resolve) => {
-      setTimeout(() => {
+    await new Promise((resolve) => {
+      const timerId = setTimeout(() => {
         resolve(null);
-      }, TIMEOUT_SHOW_ERROR);
-    });
-    console.log(timeout);
-    const data: null = await timeout;
-    return data;
-  },
+        clearTimeout(timerId);
+      }, 5000);
+    })
+    // const data = null;
+
+  // const timeout = await new Promise((resolve) => {
+  //   setTimeout(() => {
+  //     resolve(null);
+  //   }, TIMEOUT_SHOW_ERROR);
+  // });
+  // console.log(timeout);
+  // const data: null = await timeout;
+  // return data;
+);
+
+export const giveMeSomeTime = createAsyncThunk<null>(
+  'todos/giveMeSomeTime',
+  async () =>
+    await new Promise((resolve) => {
+      const timerId = setTimeout(() => {
+        console.log('giveMeSomeTime api');
+        resolve(null);
+        clearTimeout(timerId);
+      }, 2000);
+    })
 );
