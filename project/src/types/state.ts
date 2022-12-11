@@ -17,6 +17,7 @@ export type Data = {
   isOffersDataLoading: boolean;
   isOfferDataLoading: boolean;
   error: string | null;
+  count: number;
 };
 
 export type ReviewsProcess = {

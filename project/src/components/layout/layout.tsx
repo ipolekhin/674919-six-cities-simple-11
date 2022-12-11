@@ -6,6 +6,7 @@ import {getAuthorizationStatus, getLogin} from '../../store/user-process/selecto
 import {logoutAction} from '../../store/user-process/api';
 import LoadingScreen from '../loading-screen/loading-screen.';
 import {getOffersDataLoadingStatus} from '../../store/data/selector';
+import {countPlus} from "../../store/data/api";
 
 const Layout = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -20,8 +21,15 @@ const Layout = (): JSX.Element => {
     dispatch(logoutAction());
   };
 
+  const count = useAppSelector((state) => state.DATA.count);
+  const handleDivClick = () => {
+    console.log('handleDivClick');
+    dispatch(countPlus());
+  };
+
   return (
     <div className={`page ${pageClassName ? pageClassName : ''}`}>
+      <div style={{textAlign: 'center', cursor: 'pointer'}} onClick={handleDivClick}>new - {count}</div>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">

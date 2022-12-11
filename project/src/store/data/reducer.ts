@@ -1,7 +1,7 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../name-space';
 import {AppRoute, Cities, SortList} from '../../const';
-import {fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction, clearErrorAction} from './api';
+import {clearErrorAction, fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction} from './api';
 import {Data} from '../../types/state';
 import {redirectToRoute} from '../action';
 
@@ -14,6 +14,7 @@ const initialState: Data = {
   isOffersDataLoading: false,
   isOfferDataLoading: false,
   error: null,
+  count: 0,
 };
 
 const dataReducer = createSlice({
@@ -28,6 +29,9 @@ const dataReducer = createSlice({
     },
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
+      console.log('setError');
+      console.log(action.payload);
+      state.count = state.count + 1;
     },
     //todo
     // clearErrorAction: (state) => {
@@ -35,6 +39,9 @@ const dataReducer = createSlice({
     // },
     setOffersDataLoadingStatus: (state, action:PayloadAction<boolean>) => {
       state.isOffersDataLoading = false;
+    },
+    countPlus: (state, action:PayloadAction<boolean>) => {
+      state.count = state.count + 1;
     },
   },
   extraReducers(builder) {
@@ -63,7 +70,11 @@ const dataReducer = createSlice({
       .addCase(fetchOffersNearAction.fulfilled, (state, action) => {
         state.offersNear = action.payload;
       })
+    // .addCase(countPlus, (state, action) => {
+    //   state.count = state.count + 1;
+    // });
       .addCase(clearErrorAction.fulfilled, (state, action) => {
+        console.log('clearErrorAction');
         state.error = action.payload;
       });
   },

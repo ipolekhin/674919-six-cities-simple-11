@@ -5,6 +5,7 @@ import {Offer, Offers} from '../../types/offers';
 import {APIRoute} from '../../const';
 import {TIMEOUT_SHOW_ERROR} from '../../const';
 import {setError} from './reducer';
+import {dropToken} from "../../services/token.";
 
 export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
   state: State;
@@ -41,19 +42,38 @@ export const fetchOffersNearAction = createAsyncThunk<Offers, number, {
   },
 );
 
-export const clearErrorAction = createAsyncThunk(
+export const countPlus = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+}>(
+  'user/countNew',
+  (_arg, {dispatch}) => {
+    console.log('countPlus API');
+    dispatch(countPlus());
+  },
+);
+
+export const clearErrorAction = createAsyncThunk<null>(
   'data/clearError',
-  async (_arq, {dispatch}) => {
+  async () => {
     // store.dispatch(setOffersDataLoadingStatus(false));
     // setTimeout(
     //   () => dispatch(setError(null)
     //   ), TIMEOUT_SHOW_ERROR);
 
-    const timeout = new Promise((resolve): null => {
+    // await new Promise((resolve) => {
+    //   const timerId = setTimeout(() => {
+    //     resolve(null);
+    //     clearTimeout(timerId);
+    //   }, 12000);
+    // });
+
+    const timeout = await new Promise((resolve) => {
       setTimeout(() => {
         resolve(null);
       }, TIMEOUT_SHOW_ERROR);
     });
+    console.log(timeout);
     const data: null = await timeout;
     return data;
   },
