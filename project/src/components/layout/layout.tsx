@@ -68,9 +68,6 @@ const Layout = (): JSX.Element => {
         </div>
       </header>
 
-      {/*{isOffersDataLoading ?*/}
-      {/*  <LoadingScreen/>*/}
-      {/*  : <Outlet/>}*/}
       {isOffersDataLoading &&
         <LoadingScreen/>}
       <Outlet/>

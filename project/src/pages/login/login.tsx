@@ -16,10 +16,16 @@ const Login = (): JSX.Element => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (authorizationStatus === AuthorizationStatus.Auth) {
+    let isNeedUpdate = true;
+
+    if (authorizationStatus === AuthorizationStatus.Auth && isNeedUpdate) {
       navigate(AppRoute.Main);
     }
-  }, [authorizationStatus]);
+
+    return () => {
+      isNeedUpdate = false;
+    };
+  }, [navigate, authorizationStatus]);
 
   const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();

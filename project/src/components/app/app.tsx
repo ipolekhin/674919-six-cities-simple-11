@@ -16,7 +16,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <HistoryRoute history={browserHistory}>

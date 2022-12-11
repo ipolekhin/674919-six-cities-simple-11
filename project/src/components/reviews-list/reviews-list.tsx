@@ -6,7 +6,7 @@ import {AuthorizationStatus} from '../../const';
 import {getReviewsOfOffer} from '../../store/reviews-process/selector';
 import {getAuthorizationStatus} from '../../store/user-process/selector';
 
-const reviewMaxLength = 10;
+const REVIEW_MAX_LENGTH = 10;
 
 const ReviewsList = (): JSX.Element => {
   const reviews = useAppSelector(getReviewsOfOffer).slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -19,7 +19,7 @@ const ReviewsList = (): JSX.Element => {
       <ul className="reviews__list">
         {
           reviews &&
-          reviews.slice(0, reviewMaxLength).map((review) => (
+          reviews.slice(0, REVIEW_MAX_LENGTH).map((review) => (
             <ReviewsItem key={review.id} review={review}/>
           ))
         }

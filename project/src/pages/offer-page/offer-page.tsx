@@ -24,7 +24,7 @@ const OfferPage = (): JSX.Element => {
       dispatch(fetchOffersNearAction(paramsId));
       dispatch(fetchReviewsOfOffersAction(paramsId));
     }
-  }, [offer, paramsId]);
+  }, [dispatch, offer, paramsId]);
 
 
   if (isOffersDataLoading) {
