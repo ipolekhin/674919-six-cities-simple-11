@@ -6,7 +6,7 @@ import {City, PropertyClassName} from '../../const';
 import CitiesList from '../../components/cities-list/cities-list';
 import {useAppSelector} from '../../hooks';
 import MainEmpty from '../../components/main-empty/main-empty';
-import PlacesSorting from '../../components/places-sortting/places-sorting';
+import PlacesSorting from '../../components/places-sorting/places-sorting';
 import {NameSpace} from '../../store/name-space';
 import {getCurrentCity, getOffersCitySorted} from '../../store/data/selector';
 
