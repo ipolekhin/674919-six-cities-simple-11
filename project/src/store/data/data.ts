@@ -32,7 +32,7 @@ const data = createSlice({
     clearErrorAction: (state) => {
       state.error = null;
     },
-    setOffersDataLoadingStatus: (state, action:PayloadAction<boolean>) => {
+    setOffersDataLoadingStatus: (state) => {
       state.isOffersDataLoading = false;
     },
   },
