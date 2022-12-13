@@ -10,13 +10,20 @@ import browserHistory from '../../browser-history';
 import {useEffect} from 'react';
 import {fetchOffersAction} from '../../store/data/api';
 import {useAppDispatch} from '../../hooks';
+import {name} from 'faker';
+import {makeFakeReviews} from '../../utils/mocks';
+
+const reviews = makeFakeReviews();
+// console.log('---reviews---');
+// console.log(reviews);
 
 const App = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-  }, [dispatch]);
+    console.log(name.title());
+  }, []);
 
   return (
     <HistoryRoute history={browserHistory}>
