@@ -53,7 +53,6 @@ const data = createSlice({
       })
       .addCase(fetchOneOfferAction.rejected, (state) => {
         state.isOffersDataLoading = false;
-        redirectToRoute(AppRoute.PageNotExist);
       })
       .addCase(fetchOneOfferAction.fulfilled, (state, action) => {
         state.offer = action.payload;
