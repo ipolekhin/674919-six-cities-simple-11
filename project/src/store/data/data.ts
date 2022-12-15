@@ -1,9 +1,8 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {NameSpace} from '../name-space';
-import {AppRoute, Cities, SortList} from '../../const';
+import {Cities, SortList} from '../../const';
 import {fetchOffersAction, fetchOffersNearAction, fetchOneOfferAction} from './api';
 import {Data} from '../../types/state';
-import {redirectToRoute} from '../action';
 
 const initialState: Data = {
   city: Cities[0],

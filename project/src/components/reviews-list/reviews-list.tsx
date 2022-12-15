@@ -1,4 +1,4 @@
-import React, {memo, useEffect} from 'react';
+import React, {memo} from 'react';
 import ReviewsItem from '../reviews-item/reviews-item';
 import Form from '../form/form';
 import {useAppSelector} from '../../hooks';
@@ -6,22 +6,11 @@ import {AuthorizationStatus} from '../../const';
 import {getReviewsOfOffer} from '../../store/reviews-process/selector';
 import {getAuthorizationStatus} from '../../store/user-process/selector';
 
-import {makeFakeReviews} from '../../utils/mocks';
-
 const reviewMaxLength = 10;
-const reviewsFake = makeFakeReviews();
-console.log('---reviewsFake---');
-console.log(reviewsFake);
-console.log('---reviewsFake---');
 
 const ReviewsList = (): JSX.Element => {
   const reviews = useAppSelector(getReviewsOfOffer).slice().sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-
-  useEffect(() => {
-    // console.log('reviews');
-    // console.log(reviews);
-  }, [reviews]);
 
   return (
     <section className="property__reviews reviews">
