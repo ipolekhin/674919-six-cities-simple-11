@@ -1,10 +1,10 @@
 import userProcess from './user-process';
 import {checkAuthAction, loginAction, logoutAction} from './api';
 import {AuthorizationStatus} from '../../const';
-import {makeFakeLogin} from '../../utils/mocks';
+// import {makeFakeLogin} from '../../utils/mocks';
 import {UserProcess} from '../../types/state';
 
-const fakeLogin = makeFakeLogin();
+// const fakeLogin = makeFakeLogin();
 
 describe('Reducer: userProcess', () => {
   let state: UserProcess;
