@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';

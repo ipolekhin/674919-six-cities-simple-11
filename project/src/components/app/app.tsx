@@ -14,7 +14,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(fetchOffersAction());
-  }, []);
+  }, [dispatch]);
 
   return (
     <Routes>
