@@ -1,11 +1,11 @@
 import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
+import {Provider} from 'react-redux';
+import {configureMockStore} from '@jedmao/redux-mock-store';
 import Login from './login';
 import HistoryRoute from '../../components/history-route/history-route';
 import userEvent from '@testing-library/user-event';
-import {Provider} from 'react-redux';
 import {AppRoute, AuthorizationStatus, Cities} from '../../const';
-import {configureMockStore} from '@jedmao/redux-mock-store';
 
 describe('Component: AuthScreen', () => {
   const mockStore = configureMockStore();
