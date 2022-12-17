@@ -1,28 +1,26 @@
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRoute from '../../components/history-route/history-route';
-import PlaceCard from './place-card';
-import {makeFakeOffer} from '../../utils/mocks';
-import {PropertyClassName} from '../../const';
+import PlacesSorting from './places-sorting';
+import {Cities} from '../../const';
 
-const offer = makeFakeOffer();
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
 const store = mockStore({});
 
-describe('Component: PlaceCard', () => {
+describe('Component: PlacesSorting', () => {
   it('should render correctly', () => {
-    const fakeHandleActiveOfferChange = jest.fn();
-
     render(
       <Provider store={store}>
         <HistoryRoute history={history}>
-          <PlaceCard offer={offer} onSetActiveOffer={fakeHandleActiveOfferChange} itemClassName={PropertyClassName.PlaceCardItemCities}/>
+          <PlacesSorting currentSortName={Cities[0]}/>
         </HistoryRoute>
       </Provider>
     );
+
+    expect(screen.getByText('Sort by')).toBeInTheDocument();
   });
 });

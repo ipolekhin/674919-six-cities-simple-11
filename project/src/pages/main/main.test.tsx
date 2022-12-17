@@ -1,28 +1,34 @@
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRoute from '../../components/history-route/history-route';
-import PlaceCard from './place-card';
-import {makeFakeOffer} from '../../utils/mocks';
-import {PropertyClassName} from '../../const';
+import Main from './main';
+import {Cities} from '../../const';
+import {makeFakeOffers} from '../../utils/mocks';
 
-const offer = makeFakeOffer();
+const offers = makeFakeOffers();
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
-const store = mockStore({});
+const store = mockStore({
+  DATA: {
+    city: Cities[0],
+    offers,
+  }
+});
 
-describe('Component: PlaceCard', () => {
+describe('Component: Main', () => {
   it('should render correctly', () => {
-    const fakeHandleActiveOfferChange = jest.fn();
-
     render(
       <Provider store={store}>
         <HistoryRoute history={history}>
-          <PlaceCard offer={offer} onSetActiveOffer={fakeHandleActiveOfferChange} itemClassName={PropertyClassName.PlaceCardItemCities}/>
+          <Main/>
         </HistoryRoute>
       </Provider>
     );
+
+    expect(screen.getAllByText(/Places/i)[0]).toBeInTheDocument();
+    expect(screen.getByTestId('main')).toBeInTheDocument();
   });
 });

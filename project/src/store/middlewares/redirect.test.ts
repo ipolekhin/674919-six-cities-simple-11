@@ -31,22 +31,6 @@ describe('Middleware redirect', () => {
     ]);
   });
 
-  it('should be redirect to /404', () => {
-    store.dispatch(redirectToRoute(AppRoute.PageNotExist));
-    expect(fakeHistory.location.pathname).toBe(AppRoute.PageNotExist);
-    expect(store.getActions()).toEqual([
-      redirectToRoute(AppRoute.PageNotExist),
-    ]);
-  });
-
-  it('should be redirect to /main', () => {
-    store.dispatch(redirectToRoute(AppRoute.Main));
-    expect(fakeHistory.location.pathname).toBe(AppRoute.Main);
-    expect(store.getActions()).toEqual([
-      redirectToRoute(AppRoute.Main),
-    ]);
-  });
-
   it('should not to be redirect /lose because bad action', () => {
     store.dispatch({type: 'UNKNOWN_ACTION', payload: AppRoute.Lose});
     expect(fakeHistory.location.pathname).not.toBe(AppRoute.Lose);

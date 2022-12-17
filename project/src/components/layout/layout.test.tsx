@@ -1,28 +1,31 @@
-import {render} from '@testing-library/react';
+import {render, screen} from '@testing-library/react';
 import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRoute from '../../components/history-route/history-route';
-import PlaceCard from './place-card';
-import {makeFakeOffer} from '../../utils/mocks';
-import {PropertyClassName} from '../../const';
+import Layout from './layout';
+import {AuthorizationStatus} from '../../const';
 
-const offer = makeFakeOffer();
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
-const store = mockStore({});
+const store = mockStore({
+  USER: {authorizationStatus: AuthorizationStatus.NoAuth},
+  DATA: {
+    isOffersDataLoading: false,
+  }
+});
 
-describe('Component: PlaceCard', () => {
+describe('Component: Layout', () => {
   it('should render correctly', () => {
-    const fakeHandleActiveOfferChange = jest.fn();
-
     render(
       <Provider store={store}>
         <HistoryRoute history={history}>
-          <PlaceCard offer={offer} onSetActiveOffer={fakeHandleActiveOfferChange} itemClassName={PropertyClassName.PlaceCardItemCities}/>
+          <Layout/>
         </HistoryRoute>
       </Provider>
     );
+
+    expect(screen.getByTestId('header')).toBeInTheDocument();
   });
 });

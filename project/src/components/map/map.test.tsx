@@ -3,24 +3,28 @@ import {createMemoryHistory} from 'history';
 import {Provider} from 'react-redux';
 import {configureMockStore} from '@jedmao/redux-mock-store';
 import HistoryRoute from '../../components/history-route/history-route';
-import PlaceCard from './place-card';
-import {makeFakeOffer} from '../../utils/mocks';
-import {PropertyClassName} from '../../const';
+import Map from './map';
+import {Cities, PropertyClassName} from '../../const';
+import {makeFakeOffers, makeFakeOffer} from '../../utils/mocks';
+import {City} from '../../const';
 
+const offers = makeFakeOffers();
 const offer = makeFakeOffer();
 
 const history = createMemoryHistory();
 const mockStore = configureMockStore();
-const store = mockStore({});
+const store = mockStore({
+  DATA: {
+    city: Cities[0],
+  }
+});
 
-describe('Component: PlaceCard', () => {
+describe('Component: Map', () => {
   it('should render correctly', () => {
-    const fakeHandleActiveOfferChange = jest.fn();
-
     render(
       <Provider store={store}>
         <HistoryRoute history={history}>
-          <PlaceCard offer={offer} onSetActiveOffer={fakeHandleActiveOfferChange} itemClassName={PropertyClassName.PlaceCardItemCities}/>
+          <Map offers={offers} city={City} activeOffer={offer} elementClassName={PropertyClassName.MapPageMain}/>
         </HistoryRoute>
       </Provider>
     );
